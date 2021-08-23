@@ -25,8 +25,7 @@
   color: white;
 }
 
-#movie-poster-table {
-}
+#movie-poster-table {}
 
 #movie-poster {
   width: 90%;
@@ -59,4 +58,23 @@
 #movie-pg {
   border: black;
   border-width: 10px;
+}
+
+#movie-theatre-dropdown {
+  background-color: white;
+  vertical-align: top;
+  left: auto;
+}
+
+.movie-theatre-dropdown-button {
+  margin: 20px;
+  width: 500px;
+  background-color: white;
+}
+
+#seat-and-schedule {
+}
+
+.time-schedules {
+  margin: 20px;
 }
