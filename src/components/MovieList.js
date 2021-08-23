@@ -7,7 +7,7 @@ function MovieList() {
     return (
         <div className="movieList">
             <Row gutter={16}>
-                <Col span={span}>
+                <Col span={span} onClick={()=> window.open("movieDetails")}>
                     <MovieCard/>
                 </Col>
                 <Col span={span}>
