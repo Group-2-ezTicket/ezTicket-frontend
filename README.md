@@ -6,6 +6,12 @@
 - Create new Branch with format **Story ID**
 - Changes should be pushed to the newly created branch (Your story id branch).
 - Merge to master only when **desk check** and **code review** has been completed.
+
+**For stories with dependency:**
+- Checkout your story branch
+- Pull from dependency branch and merge it to your branch (DO NOT PULL AND MERGE TO MAIN/MASTER)
+- Check whether there are merge conflicts.
+- Check with the team if you are not sure.
   
 **Commit Guide:**
 1. **Format: [Story ID][type]: remarks**
