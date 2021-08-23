@@ -6,6 +6,9 @@ before_script:
 - "./gradlew test"
 script:
 - "./gradlew build"
+branches:
+  only:
+    - main
 deploy:
   provider: heroku
   api_key:
