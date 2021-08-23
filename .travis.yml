@@ -1,18 +1,16 @@
-language: java
-dist: trusty
-jdk:
-- oraclejdk8
-before_script:
-- "./gradlew test"
+language: node_js
+node_js:
+- '12'
 script:
-- "./gradlew build"
+- npm test
+- npm run build
 branches:
   only:
-    - main
+  - main
 deploy:
   provider: heroku
   api_key:
-    secure: Qrhf8gPF4vCcma8QfO7TyzMs6Hyff5EUr0sXUG7aTZnnCy8re3/KteBFtbZNvEvFi6XwVZ5Jkl6sdBpqGM8NkLxozUzNW/DV9vcEHoMIXmlVq9stCQxlsFbO87z8R6hssr7MzQKeExyPcyLhaz7/LjmN+RB2twcmJp8eQryEM5K3NlkwiFk+L1uaA6sUny7ke6op+10tLDBT8bBDUDMAbcPLGNdcbfpBAUfq0YNjCIu4y3S1v1ajNVoLOVQkHzX+4UqrEohbeCh0ixnsc89LVglv7cHCxT8WyeT8bfrFGQK4oOqor4HJStEmT1UiL3cSzpxNP5FG9O/8yI2HDzNm8GtgJMbxj/zVC3hY+phZmtF6ieZILDirLJNvY5PhVxDhjUh8not5Yqj66nck2a3WZw4brDtO4zk9+QMSughLQ1cA1o6Ykrf9eHTkLXSkn+f3mApUbNfCo3BS29LjWslNMSw3MaHHEt1mr75kmgbySfHuWf1dEhJsa+leaFK/iLriO6jotZU9Z00Qfy5jOHQYQ//GRIx2UW0zmwN9CBLqLTfuZV9Y3Vbw2BtqrHtNK6BUaY9TVE/hj9IbPy+obr6bz4vb85t6cWuNsaZSNEcWxMbWF1uPUh9eh0SxihPETDXeLktTplLLyy+Jkq0qaoNMyDGQ+XT3GLeTG1Bz/xiBOiw=
+    secure: v1CUlyADWw5K7j5yQSxPOHquShBzq6akV55LRKg9NPYo4s7USfjFOeJkpXqJE4Nt9nWLmlH/YeIZDyO3NFeU3Czv5ScBd5FRfri0XroivzmlbhGBIdPSm/kOObsQEwKslVRrFgRO2iuSeeL90aV8VRSxXyN424ax8imIGsi5/lZU7EmiPqJj6js4Z82Ko+GGk6zUj+YTK/GBNWYMg26ydG5MX14IwePrJxM51tYoN+paTS7oHVEELkZIBJn0JS1dywJWARLj+aLbsr45wj3w8yik/Du9yEMGGhJAckCEKgIfLTe6o96E4TQCoPhjkP6j5l4m5y1xgYzzWJhZ/h6z+xuhINdX+wlWYBSmIJy0FCC9nP8WFl5ont4O/ayf50YaXsqnVIgALpooEiORj7BSByh+b5NX1+dQTu31QRWclgR/dUYVwubvCIMPP8zunN2C36ujoZH+AdIFmDFvGFJhrghVUZ+1egQHBfrnUNSDNLGJpTN+NvOa9bRZVgZ7BPCkVYTMOzhEAwhfOC/PYZIZf0TPCU33glS24Mg/cjtiV4QXAFSWkluKzgQ/eOTyBd8O9ycTTv8/bBxsPVGKcCPls2nFspFlSG9VQuc1sCAVLWEK0w/FBW/3FHN26Y5mq4R5Byvnj7Hrr4r4yVICf6esUhc9WgtVJ6qqOmAIdD3oaVY=
   app: group2-ita06-ezticket-frontend
   on:
     repo: Group-2-ezTicket/ezTicket-frontend
