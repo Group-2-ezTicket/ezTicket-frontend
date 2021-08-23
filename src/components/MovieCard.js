@@ -7,7 +7,7 @@ function MovieCard() {
         <div>
             <Card hoverable
                 style={
-                    {width: 300}
+                    {width: 250}
                 }
                 cover={
                     <img
