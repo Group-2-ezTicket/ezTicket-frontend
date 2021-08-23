@@ -2,6 +2,16 @@
   text-align: center;
 }
 
+.allButFooter{
+  min-height: calc(100vh - 0px);
+}
+
+.movieList{
+  margin: 0 auto;
+  width: 1800px;
+  padding: 30px;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
