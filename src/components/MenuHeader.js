@@ -4,13 +4,13 @@ import '../styles/MenuHeader.css'
 import CinemaFilterForm from './CinemaFilterForm';
 const {Header} = Layout;
 
-function MenuHeader() {
+function MenuHeader(props) {
     return (
         <div>
             <Layout className="layout">
                 <Header>
                     <span className="logo">EZTicket</span>
-                    <CinemaFilterForm></CinemaFilterForm>
+                    <CinemaFilterForm updateCinemaName={props.updateCinemaName}></CinemaFilterForm>
                     <div className="menuHeader">
                         <Menu theme="dark" mode="horizontal"
                             defaultSelectedKeys={
