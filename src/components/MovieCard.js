@@ -28,7 +28,7 @@ function MovieCard(props) {
                 }
                 </p>
                 <p>PHP {movie.item.price}</p>
-                <Button type="primary" onClick={() => window.open(`movies/${id}`)} >Book Now</Button>
+                <Button type="primary" onClick={() => window.open(`movies/${id}`)} >Reserve Seat</Button>
             </Card>
         </div>
     );
