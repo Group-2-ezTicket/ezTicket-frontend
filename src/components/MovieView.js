@@ -1,10 +1,10 @@
 import React from 'react';
 import '../styles/MovieDetails.css'
-import { Menu, Dropdown, Button, message, Space, Tooltip, Rate, DatePicker } from 'antd';
-import { DownOutlined, UserOutlined } from '@ant-design/icons';
+import { Menu, Dropdown, Button, message, Space, Rate, DatePicker } from 'antd';
+import { DownOutlined } from '@ant-design/icons';
+import SeatList from './SeatList';
 
 function MovieView() {
-    const span = 5;
 
     function handleMenuClick(e) {
         message.info('Click on menu item.');
@@ -33,7 +33,7 @@ function MovieView() {
         <div>
             <table id="movie-details">
                 <tr>
-                    <td id="movie-poster-table"><img id="movie-poster" src="https://pbs.twimg.com/media/E4LSNucVEAY-lI2.jpg" /></td>
+                    <td id="movie-poster-table"><img id="movie-poster" alt="" src="https://pbs.twimg.com/media/E4LSNucVEAY-lI2.jpg" /></td>
                     <td id="movie-description">
                         <b id="movie-pg">PG-13</b>
                         <h1 id="movie-title">Venom: Let There Be Carnage</h1>
@@ -63,6 +63,9 @@ function MovieView() {
                     <Button>1:00 PM - 3:00 PM</Button>
                     <Button>9:00 AM - 11:00 AM</Button>
                     <Button>1:00 PM - 3:00 PM</Button>
+                </div>
+                <div className="seatList">
+                    <SeatList></SeatList>
                 </div>
             </div>
         </div >
