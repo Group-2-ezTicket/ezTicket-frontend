@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card, Button } from 'antd';
+import { Card, Button } from 'antd';
 import { useSelector } from 'react-redux';
 import { selectMovieById } from '../reducers/MovieSlice';
 import { StarOutlined } from '@ant-design/icons';
@@ -7,28 +7,28 @@ import { StarOutlined } from '@ant-design/icons';
 function MovieCard(props) {
     const id = props.movieId;
     const movie = useSelector(state => selectMovieById(state, id));
-    const {Meta} = Card;
+    const { Meta } = Card;
     return (
         <div>
             <Card hoverable
                 style={
-                    {width: 250}
+                    { width: 250 }
                 }
                 cover={
                     <img
-                alt={movie.item.movieTitle}
-                src={`../images/poster-${id}.jpg`}/>
-            }>
-                <Meta title={movie.item.movieTitle} description={movie.item.genre}/>
+                        alt={movie.item.movieTitle}
+                        src={`../images/poster-${id}.jpg`} />
+                }>
+                <Meta title={movie.item.movieTitle} description={movie.item.genre} />
                 <p>{
-                    [...Array(movie.item.rating)].map((elementInArray, index) => ( 
-                        
-                        <StarOutlined key={index}  />
-                        ))
-                    } 
+                    [...Array(movie.item.rating)].map((elementInArray, index) => (
+
+                        <StarOutlined key={index} />
+                    ))
+                }
                 </p>
                 <p>PHP {movie.item.price}</p>
-                <Button type="primary">Book Now</Button>
+                <Button type="primary" onClick={() => window.open(`movies/${id}`)} >Reserve Seat</Button>
             </Card>
         </div>
     );

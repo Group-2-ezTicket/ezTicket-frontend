@@ -25,12 +25,14 @@
   color: white;
 }
 
-#movie-poster-table {}
+#movie-poster-table {
+  width: 30%;
+}
 
 #movie-poster {
   width: 90%;
-  size: 20%;
-  image-resolution: 20%;
+  size: 100%;
+  image-resolution: 100%;
 }
 
 #movie-description {
