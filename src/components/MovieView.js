@@ -15,7 +15,6 @@ function MovieView() {
         console.log('click', e);
     }
 
-
     const menu = (
         <Menu onClick={handleMenuClick}>
             <Menu.Item key="1">
@@ -44,6 +43,7 @@ function MovieView() {
     const movie = useSelector((state) => selectMovieById(state, movieId));
     const dispatch = useDispatch()
     console.log(movie);
+
     if (movie) {
 
         let time = movie.duration;
@@ -59,7 +59,7 @@ function MovieView() {
                         <tr>
                             <td id="movie-poster-table"><img id="movie-poster" alt="poster" src={`../images/poster-${movie.id}.jpg`} /></td>
                             <td id="movie-description">
-                                <b id="movie-pg">PG-13</b>
+                                <b id="movie-pg">PG-13 | {movie.genre}</b>
                                 <h1 id="movie-title">{movie.movieTitle}</h1>
                                 <b id="movie-duration">{totalTime}</b><br />
                                 <Rate defaultValue={movie.rating} disabled='true'></Rate>
