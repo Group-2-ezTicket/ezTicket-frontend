@@ -3,7 +3,6 @@ import { Card, Button } from 'antd';
 import { useSelector } from 'react-redux';
 import { selectMovieById } from '../reducers/MovieSlice';
 import { StarOutlined } from '@ant-design/icons';
-import MovieView from './MovieView'
 
 function MovieCard(props) {
     const id = props.movieId;
@@ -29,7 +28,7 @@ function MovieCard(props) {
                 }
                 </p>
                 <p>PHP {movie.item.price}</p>
-                <Button type="primary" onClick={() => window.open(`movies/${id}`)} component={MovieView}>Book Now</Button>
+                <Button type="primary" onClick={() => window.open(`movies/${id}`)} >Book Now</Button>
             </Card>
         </div>
     );
