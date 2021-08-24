@@ -3,6 +3,9 @@ node_js:
 - '12'
 script:
 - npm run build
+branches:
+    only:
+    - master
 deploy:
   provider: heroku
   api_key:
