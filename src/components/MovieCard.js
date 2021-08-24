@@ -2,6 +2,7 @@ import React from 'react';
 import {Card, Button } from 'antd';
 import { useSelector } from 'react-redux';
 import { selectMovieById } from '../reducers/MovieSlice';
+import { StarOutlined } from '@ant-design/icons';
 
 function MovieCard(props) {
     const id = props.movieId;
@@ -15,12 +16,19 @@ function MovieCard(props) {
                 }
                 cover={
                     <img
-                alt="example"
-                src="https://pbs.twimg.com/media/E4LSNucVEAY-lI2.jpg"/>
+                alt={movie.item.movieTitle}
+                src={`../images/poster-${id}.jpg`}/>
             }>
-                <Meta title={movie.movieTitle} description="2 HR 30 MINS"/>
-                <p>{movie.rating}</p>
-                <Button type="primary">Primary Button</Button>
+                <Meta title={movie.item.movieTitle} description={movie.item.genre}/>
+                <p>{
+                    [...Array(movie.item.rating)].map((elementInArray, index) => ( 
+                        
+                        <StarOutlined key={index}  />
+                        ))
+                    } 
+                </p>
+                <p>PHP {movie.item.price}</p>
+                <Button type="primary">Book Now</Button>
             </Card>
         </div>
     );

@@ -7,3 +7,4 @@ export const getCinemas = () => {
 export const getMoviesByCinemaId = (id) => {
     return api.get(`/cinemas/${id}/movies`);
 }
+
