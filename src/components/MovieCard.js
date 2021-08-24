@@ -11,7 +11,7 @@ function MovieCard(props) {
         <div>
             <Card hoverable
                 style={
-                    {width: 300}
+                    {width: 250}
                 }
                 cover={
                     <img

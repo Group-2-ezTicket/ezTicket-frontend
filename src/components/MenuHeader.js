@@ -2,10 +2,15 @@ import React from 'react';
 import {Layout, Menu} from 'antd';
 import '../styles/MenuHeader.css'
 import CinemaFilterForm from './CinemaFilterForm';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import MovieDetails from './MovieView'
+import MovieList from './MovieList';
+
 const {Header} = Layout;
 
 function MenuHeader(props) {
     return (
+    <Router>
         <div>
             <Layout className="layout">
                 <Header>
@@ -21,8 +26,16 @@ function MenuHeader(props) {
                         </Menu>
                     </div>
                 </Header>
+                
+      
             </Layout>
+          
         </div>
+        <Switch>
+        <Route exact path="/" component={MovieList}></Route>
+        <Route exact path="/movieDetails" component={MovieDetails}></Route>
+        </Switch>
+        </Router>
     );
 }
 

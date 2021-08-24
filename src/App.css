@@ -7,9 +7,13 @@
 }
 
 .movieList{
+  width: 1550px;
+  height: auto;
   margin: 0 auto;
-  width: 1800px;
-  padding: 30px;
+  padding: 10px;
+  position: relative;
+  margin-top: 50px;
+  float: right;
 }
 
 .App-logo {
