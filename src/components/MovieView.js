@@ -1,14 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react'
 import '../styles/MovieDetails.css'
-import { Menu, Dropdown, Button, message, Space,Rate, DatePicker } from 'antd';
-import { DownOutlined} from '@ant-design/icons';
+import { Menu, Dropdown, Button, message, Space, Rate, DatePicker } from 'antd';
+import { DownOutlined } from '@ant-design/icons';
+import { getMovie } from '../apis/cinema'
+import { AddMovie } from '../reducers/MovieSlice'
+import { useDispatch, useSelector } from "react-redux"
+import { selectMovieById } from '../reducers/MovieSlice'
 
 function MovieView() {
-
+    const movieId = window.location.pathname.replace('/movies/', '')
+    console.log(movieId);
     function handleMenuClick(e) {
         message.info('Click on menu item.');
         console.log('click', e);
     }
+
 
     const menu = (
         <Menu onClick={handleMenuClick}>
@@ -28,44 +34,69 @@ function MovieView() {
         console.log(date, dateString);
     }
 
-    return (
-        <div>
-            <table id="movie-details">
-                <tr>
-                    <td id="movie-poster-table"><img id="movie-poster" alt="poster" src="https://pbs.twimg.com/media/E4LSNucVEAY-lI2.jpg" /></td>
-                    <td id="movie-description">
-                        <b id="movie-pg">PG-13</b>
-                        <h1 id="movie-title">Venom: Let There Be Carnage</h1>
-                        <b id="movie-duration">2 HR 30 MINS</b><br />
-                        <Rate defaultValue={4}></Rate>
-                        <p id="movie-synopsis">Tom Hardy returns to the big screen as the lethal protector Venom, one of MARVEL's greatest and most complex characters. Directed by Andy Serkis, the film also stars Michelle Williams, Naomie Harris and Woody Harrelson, in the role of the villain Cletus Kasady/Carnage.</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td id="movie-theatre-dropdown" colSpan="2">
-                        <hr />
-                        <Dropdown overlay={menu} className="movie-theatre-dropdown-button">
-                            <Button>
-                                Select Theatre <DownOutlined />
-                            </Button>
-                        </Dropdown>
-                    </td>
-                </tr>
-            </table>
-            <div id="seat-and-schedule">
-                <h1>Seat and Schedule</h1>
-                <Space direction="vertical">
-                    <DatePicker onChange={onChange} />
-                </Space>
-                <div className="time-schedules">
-                    <Button>9:00 AM - 11:00 AM</Button>
-                    <Button>1:00 PM - 3:00 PM</Button>
-                    <Button>9:00 AM - 11:00 AM</Button>
-                    <Button>1:00 PM - 3:00 PM</Button>
+    useEffect(() => {
+        getMovie(movieId).then((response) => {
+            console.log("response.data:", response.data);
+            dispatch(AddMovie(response.data));
+        })
+    })
+
+    const movie = useSelector((state) => selectMovieById(state, movieId));
+    const dispatch = useDispatch()
+    console.log(movie);
+    if (movie) {
+
+        let time = movie.duration;
+        var hours = Math.floor(time / 60)
+        var minutes = time % 60
+        var totalTime = `${hours} Hours ${minutes} Minutes`;
+
+        return (
+            <div>
+
+                <table id="movie-details">
+                    <tbody>
+                        <tr>
+                            <td id="movie-poster-table"><img id="movie-poster" alt="poster" src={`../images/poster-${movie.id}.jpg`} /></td>
+                            <td id="movie-description">
+                                <b id="movie-pg">PG-13</b>
+                                <h1 id="movie-title">{movie.movieTitle}</h1>
+                                <b id="movie-duration">{totalTime}</b><br />
+                                <Rate defaultValue={movie.rating} disabled='true'></Rate>
+                                <p id="movie-synopsis">{movie.synopsis}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="movie-theatre-dropdown" colSpan="2">
+                                <hr />
+                                <Dropdown overlay={menu} className="movie-theatre-dropdown-button">
+                                    <Button>
+                                        Select Theatre <DownOutlined />
+                                    </Button>
+                                </Dropdown>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div id="seat-and-schedule">
+                    <h1>Seat and Schedule</h1>
+                    <Space direction="vertical">
+                        <DatePicker onChange={onChange} />
+                    </Space>
+                    <div className="time-schedules">
+                        <Button>9:00 AM - 11:00 AM</Button>
+                        <Button>1:00 PM - 3:00 PM</Button>
+                        <Button>9:00 AM - 11:00 AM</Button>
+                        <Button>1:00 PM - 3:00 PM</Button>
+                    </div>
                 </div>
-            </div>
-        </div >
-    );
+            </div >
+        );
+    }
+    return (
+        <div>Loading...</div>
+    )
+
 }
 
 export default MovieView;
