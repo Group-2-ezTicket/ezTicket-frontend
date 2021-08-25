@@ -1,40 +1,39 @@
 import React from 'react';
-import {Layout, Menu} from 'antd';
+import { Layout, Menu } from 'antd';
 import '../styles/MenuHeader.css'
-import CinemaFilterForm from './CinemaFilterForm';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import MovieDetails from './MovieView'
+import MovieView from './MovieView'
 import MovieList from './MovieList';
+import CheckoutSummary from './CheckoutSummary';
 
-const {Header} = Layout;
+const { Header } = Layout;
 
-function MenuHeader() {
+function MenuHeader(props) {
+
     return (
-    <Router>
-        <div>
-            <Layout className="layout">
-                <Header>
-                    <span className="logo">EZTicket</span>
-                    <CinemaFilterForm></CinemaFilterForm>
-                    <div className="menuHeader">
-                        <Menu theme="dark" mode="horizontal"
-                            defaultSelectedKeys={
-                                ['2']
-                        }>
-                            <Menu.Item key={1}>MOVIES</Menu.Item>
-                            <Menu.Item key={2}>FOOD OPTIONS</Menu.Item>
-                        </Menu>
-                    </div>
-                </Header>
-                
-      
-            </Layout>
-          
-        </div>
-        <Switch>
-        <Route exact path="/" component={MovieList}></Route>
-        <Route exact path="/movieDetails" component={MovieDetails}></Route>
-        </Switch>
+        <Router>
+            <div>
+                <Layout className="layout">
+                    <Header>
+                        <span className="logo">EZTicket</span>
+                        <div className="menuHeader">
+                            <Menu theme="dark" mode="horizontal"
+                                defaultSelectedKeys={
+                                    ['1']
+                                }>
+                                <Menu.Item key={1}>MOVIES</Menu.Item>
+                                <Menu.Item key={2}>FOOD OPTIONS</Menu.Item>
+                            </Menu>
+                        </div>
+                    </Header>
+                </Layout>
+            </div>
+            <Switch>
+                <Route exact path="/"  component={MovieList}/>
+                <Route exact path="/movies/:id" component={MovieView}></Route>
+                {/* <Route exact path="/movies/*" render={props => <MovieView getCinemaId = {getCinemaId} />}></Route> */}
+                <Route exact path="/checkout" component={CheckoutSummary}></Route>
+            </Switch>
         </Router>
     );
 }

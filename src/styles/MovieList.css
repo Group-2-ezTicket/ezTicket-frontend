@@ -1,7 +1,13 @@
-.movieList {
+/* .movieList {
     width: 640px;
     height: auto;
     margin: 0 auto;
     padding: 10px;
     position: relative;
+} */
+
+.cinemaName {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight:bold;
+    
 }

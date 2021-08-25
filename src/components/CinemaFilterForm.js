@@ -3,8 +3,10 @@ import {Input} from 'antd';
 import '../styles/CinemaFilterForm.css';
 const {Search} = Input;
 
-function CinemaFilterForm() {
-    const onSearch = value => console.log(value);
+function CinemaFilterForm(props) {
+    const onSearch = value => {
+        props.updateCinemaName(value);
+    }
     return (
         <div className="cinemaFilter">
             <Search placeholder="Search for Cinemas" onSearch={onSearch} enterButton />
