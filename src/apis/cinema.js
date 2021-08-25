@@ -5,9 +5,13 @@ export const getCinemas = () => {
 }
 
 export const getMoviesByCinemaId = (id) => {
-    return api.get(`/cinemas/${id}/movies`);
+    return api.get(`/schedules/movies?cinemaId=${id}`);
 }
 
 export const getMovie = (id) => {
-    return api.get(`/movies/${id}`)
+    return api.get(`/movies/${id}`);
+}
+
+export const getCinemabyMovieId = (id) => {
+    return api.get(`/schedules/cinemas?movieId=${id}`);
 }

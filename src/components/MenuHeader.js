@@ -1,21 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Layout, Menu } from 'antd';
 import '../styles/MenuHeader.css'
-import CinemaFilterForm from './CinemaFilterForm';
+
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import MovieView from './MovieView'
 import MovieList from './MovieList';
+import CheckoutSummary from './CheckoutSummary';
 
 const { Header } = Layout;
 
 function MenuHeader(props) {
+    const [cinemaId, setCinemaId] = useState(0);
+
+    function saveCinemaId(id){
+        console.log("save cinemaId: ", id)
+        setCinemaId(id);
+    }
+
+    function getCinemaId(){
+        return cinemaId;
+    }
+
     return (
         <Router>
             <div>
                 <Layout className="layout">
                     <Header>
                         <span className="logo">EZTicket</span>
-                        <CinemaFilterForm updateCinemaName={props.updateCinemaName}></CinemaFilterForm>
+                        {/* <CinemaFilterForm ></CinemaFilterForm> */}
                         <div className="menuHeader">
                             <Menu theme="dark" mode="horizontal"
                                 defaultSelectedKeys={
@@ -29,8 +41,10 @@ function MenuHeader(props) {
                 </Layout>
             </div>
             <Switch>
-                <Route exact path="/" component={MovieList}></Route>
-                <Route exact path="/movies/*" component={MovieView}></Route>
+                <Route exact path="/"  component={MovieList}/>
+                <Route exact path="/movies/:id" component={MovieView}></Route>
+                {/* <Route exact path="/movies/*" render={props => <MovieView getCinemaId = {getCinemaId} />}></Route> */}
+                <Route exact path="/checkout" component={CheckoutSummary}></Route>
             </Switch>
         </Router>
     );
