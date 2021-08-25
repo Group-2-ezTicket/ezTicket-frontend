@@ -54,7 +54,7 @@ function MovieList(props) {
                 <Row gutter={16}>
                     {
                         movieIds.map((id) => (
-                            <Col span={span} key={id} onClick={()=> window.open("movieView")} >
+                            <Col span={span} key={id} >
                                 <MovieCard movieId={id} key={id} />
                             </Col>
                         ))
