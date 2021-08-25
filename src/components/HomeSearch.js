@@ -1,7 +1,5 @@
 import React, {useState} from 'react';
-import {Layout} from 'antd';
-import { Input, AutoComplete, Button, renderTitle, renderItem } from 'antd';
-import { PropertySafetyFilled, UserOutlined } from '@ant-design/icons';
+import { Input, AutoComplete} from 'antd';
 
 
 function HomeSearch(props){
