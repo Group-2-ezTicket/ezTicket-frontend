@@ -2,7 +2,7 @@ import React, { useEffect,useState } from 'react'
 import '../styles/MovieDetails.css'
 import { Menu, Dropdown, Button, message, Space, Rate, DatePicker } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
-import { getMovie, getTimeSchedulesPerCinemaAndMovie } from '../apis/cinema'
+import { getMovie, getTimeSchedulesPerCinemaAndMovie, getSeatsByScheduleId } from '../apis/cinema'
 import { AddMovie } from '../reducers/MovieSlice'
 import { useDispatch, useSelector } from "react-redux"
 import { selectMovieById } from '../reducers/MovieSlice'
@@ -39,7 +39,9 @@ function MovieView(props) {
     }
 
     //const cinemaId = 1;
+    const seatId = 1;
     const [timeSchedules, setTimeSchedules] = useState();
+    const [seats, setSeats] = useState();
 
     useEffect(() => {
         getMovie(movieId).then((response) => {
@@ -49,14 +51,18 @@ function MovieView(props) {
         getTimeSchedulesPerCinemaAndMovie(cinemaId,movieId).then((response) => {
             setTimeSchedules(response.data);
         });
+
+        getSeatsByScheduleId(seatId).then((response) => {
+            setSeats(response.data);
+        });
     })
 
-    console.log("timeShed",timeSchedules);
+    console.log("seats",seats);
 
     const movie = useSelector((state) => selectMovieById(state, movieId));
     const dispatch = useDispatch()
 
-    if (movie && timeSchedules) {
+    if (movie && timeSchedules && seats) {
 
         let time = movie.duration;
         var hours = Math.floor(time / 60)

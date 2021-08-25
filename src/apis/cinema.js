@@ -18,3 +18,7 @@ export const getTimeSchedulesPerCinemaAndMovie = (cinemaId,movieId) => {
 export const getCinemabyMovieId = (id) => {
     return api.get(`/schedules/cinemas?movieId=${id}`);
 }
+
+export const getSeatsByScheduleId = (id)=> {
+    return api.get(`/seats?scheduleId=${id}`);
+}
