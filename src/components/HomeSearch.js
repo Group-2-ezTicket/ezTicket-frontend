@@ -1,21 +1,22 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Input, AutoComplete} from 'antd';
-
+import { getCinemas } from "../apis/cinema";
+import { useDispatch, useSelector } from 'react-redux';
+import { AddCinemas, selectCinemas } from '../reducers/CinemaSlice';
 
 function HomeSearch(props){
-    
+    const cinemaList = useSelector(selectCinemas);
+    const dispatch = useDispatch();
+
+    useEffect (() => {
+    getCinemas().then((response) => {
+        dispatch(AddCinemas(response.data))
+    })
+    }, [])
+
     const [input, setInput] = useState("");
     
-    const options = [
-       { id: '1', value: 'SM North - Cinema 1' }, 
-       { id: '2', value: 'SM North - Cinema 2' },
-       { id: '3', value: 'Trinoma - Cinema 1' },
-       { id: '4', value: 'Trinoma - Cinema 2' },
-      ];
-
-
     const onChangeHandler = (data) =>{
-
         props.updateCinemaName(data);
         setInput(data);
     }
@@ -30,9 +31,9 @@ function HomeSearch(props){
                 padding: '20px'
                 }}
                 onChange={onChangeHandler}
-                options={options} value={input}>
+                options={cinemaList} value={input}>
                 
-                <Input.Search size="large" placeholder="input here"  />
+                <Input size="large" placeholder="Choose Cinema"  />
             </AutoComplete>
             
         </div>
