@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Layout, Menu } from 'antd';
 import '../styles/MenuHeader.css'
-
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import MovieView from './MovieView'
 import MovieList from './MovieList';
@@ -27,7 +26,6 @@ function MenuHeader(props) {
                 <Layout className="layout">
                     <Header>
                         <span className="logo">EZTicket</span>
-                        {/* <CinemaFilterForm ></CinemaFilterForm> */}
                         <div className="menuHeader">
                             <Menu theme="dark" mode="horizontal"
                                 defaultSelectedKeys={
