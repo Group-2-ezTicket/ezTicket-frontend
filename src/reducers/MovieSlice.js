@@ -3,7 +3,8 @@ import {createSlice, createEntityAdapter} from "@reduxjs/toolkit";
 const moviesAdapter = createEntityAdapter();
 const initialState = moviesAdapter.getInitialState({
     ids: [],
-    entities: {},
+    entities: {  
+    }, 
 });
 
 const moviesSlice = createSlice({
@@ -11,8 +12,7 @@ const moviesSlice = createSlice({
     initialState: initialState,
     reducers: {
         AddMovies(state, action) {
-            console.log("action", action.payload);
-            moviesAdapter.addMany(state, action.payload.map(item => ({id: item.movieId, ...{item}})));
+            moviesAdapter.setAll(state, action.payload.map(item => ({id: item.movieId, ...{item}})));
         }
     },
 })

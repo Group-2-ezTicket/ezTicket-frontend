@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {Col, Row} from 'antd';
 import MovieCard from './MovieCard';
-import { selectMovieIds } from '../reducers/MovieSlice';
+import {selectMovieIds } from '../reducers/MovieSlice';
 import { useSelector } from 'react-redux';
 import { getMoviesByCinemaId } from "../apis/cinema";
 import { useDispatch } from 'react-redux';
@@ -14,14 +14,15 @@ function MovieList(props) {
     
     const dispatch = useDispatch();
 
-    const [cinemaId, setCinemaId] = useState(0);
+    const [cinemaId, setCinemaId] = useState(1);
     const [cinemaName, setCinemaName] =useState('');
 
     useEffect(() => {
+        console.log("useEffect");
         getMoviesByCinemaId(cinemaId).then((response) => {
             dispatch(AddMovies(response.data))
         })
-    })
+    }, [cinemaId])
 
     function updateCinemaName(cinemaName){
         setCinemaName(cinemaName);
@@ -30,14 +31,19 @@ function MovieList(props) {
         }
         else if (cinemaName === "SM North - Cinema 2"){
             setCinemaId(parseInt(33));
+            
         }
+        
     }
     console.log("Name:"+cinemaName);
-    console.log("MovieList: "+cinemaId);
+    console.log("Current ID: "+cinemaId);
     return (
         <div>
             <div className='searchBar'>
             <HomeSearch updateCinemaName={updateCinemaName}/>   
+            </div>
+            <div>
+                <h2>{cinemaName}</h2>
             </div>
             <div className="movieList">
                 <Row gutter={16}>
