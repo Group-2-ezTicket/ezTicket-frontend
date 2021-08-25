@@ -23,7 +23,7 @@ function MovieList(props) {
         getMoviesByCinemaId(cinemaId).then((response) => {
             dispatch(AddMovies(response.data))
         })
-    }, [cinemaId])
+    }, [cinemaId,dispatch])
 
     function updateCinemaName(cinemaName){
         setCinemaName(cinemaName);
