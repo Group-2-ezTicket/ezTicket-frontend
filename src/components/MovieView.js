@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react'
+import React, { useEffect,useState } from 'react'
 import '../styles/MovieDetails.css'
-import {  Button, Space, Rate, DatePicker, Divider } from 'antd';
-import { getMovie } from '../apis/cinema'
+import { Menu, Dropdown, Button, message, Space, Rate, DatePicker } from 'antd';
+import { DownOutlined } from '@ant-design/icons';
+import { getMovie, getTimeSchedulesPerCinemaAndMovie } from '../apis/cinema'
 import { AddMovie } from '../reducers/MovieSlice'
 import { useDispatch, useSelector } from "react-redux"
 import { selectMovieById } from '../reducers/MovieSlice'
@@ -14,21 +15,48 @@ function MovieView(props) {
     const cinemaId = window.location.search.split("=")[1]
     console.log("cinemaId:", cinemaId);
 
+    function handleMenuClick(e) {
+        message.info('Click on menu item.');
+        console.log('click', e);
+    }
+
+    const menu = (
+        <Menu onClick={handleMenuClick}>
+            <Menu.Item key="1">
+                SM North - Cinema 1
+            </Menu.Item>
+            <Menu.Item key="2">
+                SM North - Cinema 2
+            </Menu.Item>
+            <Menu.Item key="3">
+                SM North - Cinema 3
+            </Menu.Item>
+        </Menu>
+    );
+
     function onChange(date, dateString) {
         console.log(date, dateString);
     }
 
-    const dispatch = useDispatch()
+    //const cinemaId = 1;
+    const [timeSchedules, setTimeSchedules] = useState();
 
     useEffect(() => {
         getMovie(movieId).then((response) => {
+            console.log("response.data:", response.data);
             dispatch(AddMovie(response.data));
-        })
-    });
+        });
+        getTimeSchedulesPerCinemaAndMovie(cinemaId,movieId).then((response) => {
+            setTimeSchedules(response.data);
+        });
+    })
+
+    console.log("timeShed",timeSchedules);
 
     const movie = useSelector((state) => selectMovieById(state, movieId));
+    const dispatch = useDispatch()
 
-    if (movie) {
+    if (movie && timeSchedules) {
 
         let time = movie.duration;
         var hours = Math.floor(time / 60)
@@ -37,6 +65,7 @@ function MovieView(props) {
 
         return (
             <div>
+
                 <table id="movie-details">
                     <tbody>
                         <tr>
@@ -49,31 +78,40 @@ function MovieView(props) {
                                 <p id="movie-synopsis">{movie.synopsis}</p>
                             </td>
                         </tr>
+                        <tr>
+                            <td id="movie-theatre-dropdown" colSpan="2">
+                                <hr />
+                                <Dropdown overlay={menu} className="movie-theatre-dropdown-button">
+                                    <Button>
+                                        Select Theatre <DownOutlined />
+                                    </Button>
+                                </Dropdown>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
-                <Divider />
                 <div id="seat-and-schedule">
                     <h1>Seat and Schedule</h1>
                     <Space direction="vertical">
                         <DatePicker onChange={onChange} />
                     </Space>
                     <div className="time-schedules">
-                        <Button>9:00 AM - 11:00 AM</Button>
-                        <Button>1:00 PM - 3:00 PM</Button>
-                        <Button>9:00 AM - 11:00 AM</Button>
-                        <Button>1:00 PM - 3:00 PM</Button>
+                        {
+                            timeSchedules.map((sched) => (
+                                <Button>{sched.timeStart} - {sched.timeEnd}</Button>
+                            ))
+                        }
                     </div>
                     <div className="seatList">
                         <SeatList></SeatList>
                     </div>
-                    <Button type="primary"><Link to="/checkout">Submit Reservation</Link></Button>
                 </div>
                 <FoodPackages></FoodPackages>
             </div >
         );
     }
     return (
-        <div>Loading... Movie maybe not be available.</div>
+        <div>Loading...</div>
     )
 
 }
