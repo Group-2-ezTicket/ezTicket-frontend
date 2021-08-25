@@ -74,9 +74,89 @@
   background-color: white;
 }
 
-#seat-and-schedule {
-}
-
 .time-schedules {
   margin: 20px;
+}
+
+#hr-food {
+  width: 80%;
+}
+
+.site-card-wrapper {
+  padding: 30px;
+  margin: auto;
+  width: 50%;
+}
+
+#food-package-name {
+  color: rgb(6, 127, 131);
+}
+
+#food-package-table {
+  /* width: 250px; */
+}
+
+#food-packages {
+  width: 80%;
+  margin: auto;
+  border-style: hidden;
+  margin-top: 30px;
+  table-layout: fixed;
+}
+
+#food-package-product {
+  height: 50vh;
+}
+
+.td-food-info {
+  height: 20px;
+}
+
+#button-quantity {
+  background-color: rgb(6, 127, 131);
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin-left: 5%;
+  margin-right: 5%;
+  cursor: pointer;
+  border-radius: 5%;
+  font-size: 200%;
+}
+
+#button-quantity:hover {
+  background-color: rgb(5, 100, 104);
+}
+
+#number-quantity {
+  font-size: 200%;
+}
+
+#span-price {
+  margin: 20%;
+  margin-bottom: 50%;
+  color: rgb(5, 100, 104);
+  font-size: 200%;
+  font-weight: bolder;
+}
+
+#div-price {
+  margin: 5%;
+}
+
+.button-checkout {
+  background-color: rgb(6, 127, 131);
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  font-size: 200%;
+  margin: 5%;
+  width: 25%;
 }

@@ -6,8 +6,8 @@ import { useSelector } from 'react-redux';
 import { getMoviesByCinemaId } from "../apis/cinema";
 import { useDispatch } from 'react-redux';
 import { AddMovies } from '../reducers/MovieSlice';
-import { BrowserRouter as Router } from "react-router-dom";
 import HomeSearch from "./HomeSearch";
+import { BrowserRouter as Router } from "react-router-dom";
 import '../styles/MovieList.css';
 
 function MovieList(props) {
@@ -23,7 +23,7 @@ function MovieList(props) {
         getMoviesByCinemaId(cinemaId).then((response) => {
             dispatch(AddMovies(response.data))
         })
-    }, [cinemaId, dispatch])
+    }, [cinemaId,dispatch])
 
     function updateCinemaName(cinemaName){
         setCinemaName(cinemaName);
@@ -42,6 +42,7 @@ function MovieList(props) {
         
     }
     return (
+        <Router>
         <div>
         <Router>
             <div className='searchBar'>
@@ -54,15 +55,15 @@ function MovieList(props) {
                 <Row gutter={16}>
                     {
                         movieIds.map((id) => (
-                            <Col span={span} key={id}>
+                            <Col span={span} key={id} >
                                 <MovieCard movieId={id} cinemaId={cinemaId} key={id}/>
                             </Col>
                         ))
                     }
                 </Row>
             </div> 
+            </div>
         </Router>
-        </div>
     );
 }
 

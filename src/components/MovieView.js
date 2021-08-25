@@ -5,7 +5,7 @@ import { getMovie } from '../apis/cinema'
 import { AddMovie } from '../reducers/MovieSlice'
 import { useDispatch, useSelector } from "react-redux"
 import { selectMovieById } from '../reducers/MovieSlice'
-import {Link} from 'react-router-dom';
+import FoodPackages from './FoodPackages';
 import SeatList from './SeatList';
 
 function MovieView(props) {
@@ -68,6 +68,7 @@ function MovieView(props) {
                     </div>
                     <Button type="primary"><Link to="/checkout">Submit Reservation</Link></Button>
                 </div>
+                <FoodPackages></FoodPackages>
             </div >
         );
     }
