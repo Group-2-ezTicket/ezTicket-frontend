@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Layout, Menu } from 'antd';
 import '../styles/MenuHeader.css'
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
@@ -9,16 +9,6 @@ import CheckoutSummary from './CheckoutSummary';
 const { Header } = Layout;
 
 function MenuHeader(props) {
-    const [cinemaId, setCinemaId] = useState(0);
-
-    function saveCinemaId(id){
-        console.log("save cinemaId: ", id)
-        setCinemaId(id);
-    }
-
-    function getCinemaId(){
-        return cinemaId;
-    }
 
     return (
         <Router>

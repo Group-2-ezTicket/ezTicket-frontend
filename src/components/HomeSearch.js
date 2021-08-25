@@ -12,7 +12,7 @@ function HomeSearch(props){
     getCinemas().then((response) => {
         dispatch(AddCinemas(response.data))
     })
-    }, [])
+    }, [dispatch])
 
     const [input, setInput] = useState("");
     

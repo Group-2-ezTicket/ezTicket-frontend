@@ -3,23 +3,12 @@ import { Card, Button } from 'antd';
 import { useSelector } from 'react-redux';
 import { selectMovieById } from '../reducers/MovieSlice';
 import { StarOutlined } from '@ant-design/icons';
-import { useHistory } from "react-router-dom";
 
 function MovieCard(props) {
     const id = props.movieId;
     const cinemaId = props.cinemaId;
     const movie = useSelector(state => selectMovieById(state, id));
 
-    let history = useHistory();
-
-    function handleClick() {
-    //   history.push(`/movies/${id}/${cinemaId}`);
-    // history.push(`/movies/${id}`);
-        history.push({
-            pathname: `/movies/${id}`,
-            state: { cinemaId }
-        });
-    }
 
     const { Meta } = Card;
     return (

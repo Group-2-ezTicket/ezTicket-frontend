@@ -13,7 +13,6 @@ import '../styles/MovieList.css';
 function MovieList(props) {
     const span = 5;
     const movieIds = useSelector(selectMovieIds);
-    const cinemaId = 1;
 
     const dispatch = useDispatch();
 
@@ -24,7 +23,7 @@ function MovieList(props) {
         getMoviesByCinemaId(cinemaId).then((response) => {
             dispatch(AddMovies(response.data))
         })
-    }, [cinemaId])
+    }, [cinemaId, dispatch])
 
     function updateCinemaName(cinemaName){
         setCinemaName(cinemaName);
@@ -61,9 +60,9 @@ function MovieList(props) {
                         ))
                     }
                 </Row>
-            </div>
-            </div>
+            </div> 
         </Router>
+        </div>
     );
 }
 

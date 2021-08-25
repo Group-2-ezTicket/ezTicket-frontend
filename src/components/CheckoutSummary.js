@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, Avatar, Button, Skeleton } from 'antd';
+import { List, Skeleton } from 'antd';
 
 export default function CheckoutSummary() {
     const data = [
