@@ -1,6 +1,6 @@
 import React, { useEffect,useState } from 'react'
 import '../styles/MovieDetails.css'
-import { Menu, Dropdown, Button, message, Space, Rate, DatePicker,Divider } from 'antd';
+import { Menu, Dropdown, Button, message, Space, Rate, DatePicker } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import { getMovie, getTimeSchedulesPerCinemaAndMovie } from '../apis/cinema'
 import { AddMovie } from '../reducers/MovieSlice'
