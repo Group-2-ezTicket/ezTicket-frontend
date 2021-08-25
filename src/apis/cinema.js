@@ -9,9 +9,12 @@ export const getMoviesByCinemaId = (id) => {
 }
 
 export const getMovie = (id) => {
-    return api.get(`/movies/${id}`)
+    return api.get(`/movies/${id}`);
 }
 
 export const getTimeSchedulesPerCinemaAndMovie = (cinemaId,movieId) => {
     return api.get(`/schedules?cinemaId=${cinemaId}&movieId=${movieId}`)
+}
+export const getCinemabyMovieId = (id) => {
+    return api.get(`/schedules/cinemas?movieId=${id}`);
 }

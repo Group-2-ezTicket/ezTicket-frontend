@@ -1,15 +1,18 @@
 import React, { useEffect,useState } from 'react'
 import '../styles/MovieDetails.css'
-import { Menu, Dropdown, Button, message, Space, Rate, DatePicker } from 'antd';
+import { Menu, Dropdown, Button, message, Space, Rate, DatePicker,Divider } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import { getMovie, getTimeSchedulesPerCinemaAndMovie } from '../apis/cinema'
 import { AddMovie } from '../reducers/MovieSlice'
 import { useDispatch, useSelector } from "react-redux"
 import { selectMovieById } from '../reducers/MovieSlice'
 
-function MovieView() {
+function MovieView(props) {
     const movieId = window.location.pathname.replace('/movies/', '')
-    console.log(movieId);
+    // const movieId = 1;
+    const cinemaId = window.location.search.split("=")[1]
+    console.log("cinemaId:", cinemaId);
+
     function handleMenuClick(e) {
         message.info('Click on menu item.');
         console.log('click', e);
@@ -33,7 +36,7 @@ function MovieView() {
         console.log(date, dateString);
     }
 
-    const cinemaId = 1;
+    //const cinemaId = 1;
     const [timeSchedules, setTimeSchedules] = useState();
 
     useEffect(() => {
@@ -42,7 +45,6 @@ function MovieView() {
             dispatch(AddMovie(response.data));
         });
         getTimeSchedulesPerCinemaAndMovie(cinemaId,movieId).then((response) => {
-            //dispatch(AddSchedules(response.data));
             setTimeSchedules(response.data);
         });
     })

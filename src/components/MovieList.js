@@ -23,7 +23,7 @@ function MovieList(props) {
         getMoviesByCinemaId(cinemaId).then((response) => {
             dispatch(AddMovies(response.data))
         })
-    }, [cinemaId,dispatch])
+    }, [cinemaId, dispatch])
 
     function updateCinemaName(cinemaName){
         setCinemaName(cinemaName);
@@ -42,8 +42,8 @@ function MovieList(props) {
         
     }
     return (
-        <Router>
         <div>
+        <Router>
             <div className='searchBar'>
             <HomeSearch updateCinemaName={updateCinemaName}/>   
             </div>
@@ -54,15 +54,15 @@ function MovieList(props) {
                 <Row gutter={16}>
                     {
                         movieIds.map((id) => (
-                            <Col span={span} key={id} >
-                                <MovieCard movieId={id} key={id} />
+                            <Col span={span} key={id}>
+                                <MovieCard movieId={id} cinemaId={cinemaId} key={id}/>
                             </Col>
                         ))
                     }
                 </Row>
-            </div>
-            </div>
+            </div> 
         </Router>
+        </div>
     );
 }
 
