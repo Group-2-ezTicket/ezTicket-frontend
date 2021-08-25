@@ -62,7 +62,7 @@ function MovieList(props) {
                 </Row>
             </div> 
         </Router>
-            </div>
+        </div>
     );
 }
 
