@@ -6,6 +6,7 @@ import { AddMovie } from '../reducers/MovieSlice'
 import { useDispatch, useSelector } from "react-redux"
 import { selectMovieById } from '../reducers/MovieSlice'
 import {Link} from 'react-router-dom';
+import SeatList from './SeatList';
 
 function MovieView(props) {
     const movieId = window.location.pathname.replace('/movies/', '')
@@ -62,7 +63,9 @@ function MovieView(props) {
                         <Button>9:00 AM - 11:00 AM</Button>
                         <Button>1:00 PM - 3:00 PM</Button>
                     </div>
-
+                    <div className="seatList">
+                        <SeatList></SeatList>
+                    </div>
                     <Button type="primary"><Link to="/checkout">Submit Reservation</Link></Button>
                 </div>
             </div >
