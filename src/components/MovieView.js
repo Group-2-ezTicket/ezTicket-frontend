@@ -6,6 +6,7 @@ import { getMovie, getTimeSchedulesPerCinemaAndMovie } from '../apis/cinema'
 import { AddMovie } from '../reducers/MovieSlice'
 import { useDispatch, useSelector } from "react-redux"
 import { selectMovieById } from '../reducers/MovieSlice'
+import FoodPackages from './FoodPackages';
 
 function MovieView(props) {
     const movieId = window.location.pathname.replace('/movies/', '')
@@ -100,7 +101,9 @@ function MovieView(props) {
                             ))
                         }
                     </div>
+
                 </div>
+                <FoodPackages></FoodPackages>
             </div >
         );
     }
