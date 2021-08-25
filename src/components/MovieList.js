@@ -7,6 +7,7 @@ import { getMoviesByCinemaId } from "../apis/cinema";
 import { useDispatch } from 'react-redux';
 import { AddMovies } from '../reducers/MovieSlice';
 import HomeSearch from "./HomeSearch";
+import '../styles/MovieList.css';
 
 function MovieList(props) {
     const span = 5;
@@ -15,10 +16,9 @@ function MovieList(props) {
     const dispatch = useDispatch();
 
     const [cinemaId, setCinemaId] = useState(1);
-    const [cinemaName, setCinemaName] =useState('');
+    const [cinemaName, setCinemaName] = useState('SM South Mall - Cinema 1');
 
     useEffect(() => {
-        console.log("useEffect");
         getMoviesByCinemaId(cinemaId).then((response) => {
             dispatch(AddMovies(response.data))
         })
@@ -26,24 +26,27 @@ function MovieList(props) {
 
     function updateCinemaName(cinemaName){
         setCinemaName(cinemaName);
-        if (cinemaName === "SM North - Cinema 1"){
+        if (cinemaName === "SM South Mall - Cinema 1"){
             setCinemaId(parseInt(1));
         }
-        else if (cinemaName === "SM North - Cinema 2"){
-            setCinemaId(parseInt(33));
-            
+        else if (cinemaName === "SM South Mall - Cinema 2"){
+            setCinemaId(parseInt(2));
+        }
+        else if (cinemaName === "SM North Edsa - Cinema 1"){
+            setCinemaId(parseInt(3));
+        }
+        else if (cinemaName === "SM North Edaa - Cinema 2"){
+            setCinemaId(parseInt(4));
         }
         
     }
-    console.log("Name:"+cinemaName);
-    console.log("Current ID: "+cinemaId);
     return (
         <div>
             <div className='searchBar'>
             <HomeSearch updateCinemaName={updateCinemaName}/>   
             </div>
             <div>
-                <h2>{cinemaName}</h2>
+                <h2 className='cinemaName'>{cinemaName}</h2>
             </div>
             <div className="movieList">
                 <Row gutter={16}>
