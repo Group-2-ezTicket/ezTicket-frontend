@@ -6,7 +6,10 @@ import { StarOutlined } from '@ant-design/icons';
 
 function MovieCard(props) {
     const id = props.movieId;
+    const cinemaId = props.cinemaId;
     const movie = useSelector(state => selectMovieById(state, id));
+
+
     const { Meta } = Card;
     return (
         <div>
@@ -28,7 +31,8 @@ function MovieCard(props) {
                 }
                 </p>
                 <p>PHP {movie.item.price}</p>
-                <Button type="primary" onClick={() => window.open(`movies/${id}`)} >Reserve Seat</Button>
+                {/* <Button type="primary" onClick={handleClick} >Reserve Seat</Button> */}
+                <Button type="primary" href={`movies/${id}?cinemaId=${cinemaId}`} >Reserve Seat</Button>
             </Card>
         </div>
     );

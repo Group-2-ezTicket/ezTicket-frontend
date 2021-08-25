@@ -1,48 +1,31 @@
 import React, { useEffect } from 'react'
 import '../styles/MovieDetails.css'
-import { Menu, Dropdown, Button, message, Space, Rate, DatePicker } from 'antd';
-import { DownOutlined } from '@ant-design/icons';
+import {  Button, Space, Rate, DatePicker, Divider } from 'antd';
 import { getMovie } from '../apis/cinema'
 import { AddMovie } from '../reducers/MovieSlice'
 import { useDispatch, useSelector } from "react-redux"
 import { selectMovieById } from '../reducers/MovieSlice'
+import {Link} from 'react-router-dom';
 
-function MovieView() {
+function MovieView(props) {
     const movieId = window.location.pathname.replace('/movies/', '')
-    console.log(movieId);
-    function handleMenuClick(e) {
-        message.info('Click on menu item.');
-        console.log('click', e);
-    }
-
-    const menu = (
-        <Menu onClick={handleMenuClick}>
-            <Menu.Item key="1">
-                SM North - Cinema 1
-            </Menu.Item>
-            <Menu.Item key="2">
-                SM North - Cinema 2
-            </Menu.Item>
-            <Menu.Item key="3">
-                SM North - Cinema 3
-            </Menu.Item>
-        </Menu>
-    );
+    // const movieId = 1;
+    const cinemaId = window.location.search.split("=")[1]
+    console.log("cinemaId:", cinemaId);
 
     function onChange(date, dateString) {
         console.log(date, dateString);
     }
 
+    const dispatch = useDispatch()
+
     useEffect(() => {
         getMovie(movieId).then((response) => {
-            console.log("response.data:", response.data);
             dispatch(AddMovie(response.data));
         })
-    })
+    });
 
     const movie = useSelector((state) => selectMovieById(state, movieId));
-    const dispatch = useDispatch()
-    console.log(movie);
 
     if (movie) {
 
@@ -53,7 +36,6 @@ function MovieView() {
 
         return (
             <div>
-
                 <table id="movie-details">
                     <tbody>
                         <tr>
@@ -66,18 +48,9 @@ function MovieView() {
                                 <p id="movie-synopsis">{movie.synopsis}</p>
                             </td>
                         </tr>
-                        <tr>
-                            <td id="movie-theatre-dropdown" colSpan="2">
-                                <hr />
-                                <Dropdown overlay={menu} className="movie-theatre-dropdown-button">
-                                    <Button>
-                                        Select Theatre <DownOutlined />
-                                    </Button>
-                                </Dropdown>
-                            </td>
-                        </tr>
                     </tbody>
                 </table>
+                <Divider />
                 <div id="seat-and-schedule">
                     <h1>Seat and Schedule</h1>
                     <Space direction="vertical">
@@ -89,12 +62,14 @@ function MovieView() {
                         <Button>9:00 AM - 11:00 AM</Button>
                         <Button>1:00 PM - 3:00 PM</Button>
                     </div>
+
+                    <Button type="primary"><Link to="/checkout">Submit Reservation</Link></Button>
                 </div>
             </div >
         );
     }
     return (
-        <div>Loading...</div>
+        <div>Loading... Movie maybe not be available.</div>
     )
 
 }
