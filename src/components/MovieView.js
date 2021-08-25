@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react'
+import React, { useEffect,useState } from 'react'
 import '../styles/MovieDetails.css'
 import { Menu, Dropdown, Button, message, Space, Rate, DatePicker } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
-import { getMovie } from '../apis/cinema'
+import { getMovie, getTimeSchedulesPerCinemaAndMovie } from '../apis/cinema'
 import { AddMovie } from '../reducers/MovieSlice'
 import { useDispatch, useSelector } from "react-redux"
 import { selectMovieById } from '../reducers/MovieSlice'
@@ -33,18 +33,26 @@ function MovieView() {
         console.log(date, dateString);
     }
 
+    const cinemaId = 1;
+    const [timeSchedules, setTimeSchedules] = useState();
+
     useEffect(() => {
         getMovie(movieId).then((response) => {
             console.log("response.data:", response.data);
             dispatch(AddMovie(response.data));
-        })
+        });
+        getTimeSchedulesPerCinemaAndMovie(cinemaId,movieId).then((response) => {
+            //dispatch(AddSchedules(response.data));
+            setTimeSchedules(response.data);
+        });
     })
+
+    console.log("timeShed",timeSchedules);
 
     const movie = useSelector((state) => selectMovieById(state, movieId));
     const dispatch = useDispatch()
-    console.log(movie);
 
-    if (movie) {
+    if (movie && timeSchedules) {
 
         let time = movie.duration;
         var hours = Math.floor(time / 60)
@@ -84,10 +92,11 @@ function MovieView() {
                         <DatePicker onChange={onChange} />
                     </Space>
                     <div className="time-schedules">
-                        <Button>9:00 AM - 11:00 AM</Button>
-                        <Button>1:00 PM - 3:00 PM</Button>
-                        <Button>9:00 AM - 11:00 AM</Button>
-                        <Button>1:00 PM - 3:00 PM</Button>
+                        {
+                            timeSchedules.map((sched) => (
+                                <Button>{sched.timeStart} - {sched.timeEnd}</Button>
+                            ))
+                        }
                     </div>
                 </div>
             </div >
