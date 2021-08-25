@@ -4,8 +4,8 @@ export const getCinemas = () => {
     return api.get("/cinemas");
 }
 
-export const getMoviesByCinemaId = (id) => {
-    return api.get(`/cinemas/${id}/movies`);
+export const getMoviesByCinemaId = (cinemaId) => {
+    return api.get(`/schedules/movies/?cinemaId=${cinemaId}`);
 }
 
 export const getMovie = (id) => {
