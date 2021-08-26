@@ -35,3 +35,7 @@ export const getSeatsByScheduleId = (id)=> {
 export const addOrder = (order) => {
     return api.post("/orders", order);
 }
+
+export const updateOrderStatus = (transactionId, orderStatus) => {
+    return api.put(`/orders/${transactionId}`, orderStatus);
+}
