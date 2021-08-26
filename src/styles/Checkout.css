@@ -10,7 +10,6 @@
 .summary {
     width: 70%;
     margin: auto;
-    margin-bottom: 40px;
 }
 
 .title {
@@ -21,6 +20,7 @@
 
 .movie-details {
     text-align: left;
+    margin-bottom: 70px;
 }
 
 .payment {
@@ -28,6 +28,7 @@
     color: rgb(6, 127, 131);
     text-align: left;
 }
+
 .radio {
     display: 'block';
     height: '30px';
@@ -50,19 +51,17 @@
 }
 
 .button {
-    background-color: rgb(6, 127, 131);
+    background-color: rgb(6, 127, 131);;
     border: none;
     color: white;
-    /* padding: 15px 32px; */
     text-align: center;
     text-decoration: none;
-    /* display: inline-block; */
     cursor: pointer;
     font-size: 200%;
     margin: 5%;
     width: 50%;
 }
 .button:hover {
-    color: grey
+    color: red
 }
 

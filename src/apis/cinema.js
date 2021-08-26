@@ -29,5 +29,5 @@ export const getSeatsByScheduleId = (id)=> {
 }
 
 export const addOrder = (order) => {
-    return api.post(order);
+    return api.post("/orders", order);
 }

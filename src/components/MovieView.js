@@ -13,7 +13,8 @@ function MovieView() {
     const movieId = window.location.pathname.replace('/movies/', '');
     const cinemaId = window.location.search.split("=")[1];
     const [cinema, setCinema] = useState({}); 
-    const [timeSlot, setTimeSlot] = useState(); 
+    const [timeSlot, setTimeSlot] = useState("default"); 
+    const [schedId, setSchedId] = useState(0);
     const [day, setDay] = useState(); 
 
     function onChange(date, dateString) {
@@ -21,11 +22,10 @@ function MovieView() {
     }
 
     function onChangeTimeSlot(e) {
-        console.log(`radio checked:${e.target.value}`);
+        setSchedId(e.target.indexkey);
         setTimeSlot(e.target.value);
     }
 
-    //const cinemaId = 1;
     const seatId = 1;
     const [timeSchedules, setTimeSchedules] = useState();
     const [seats, setSeats] = useState();
@@ -50,12 +50,10 @@ function MovieView() {
         });
     }, [cinemaId, movieId, seatId, dispatch])
 
-    console.log("seats",seats);
-
     const movie = useSelector((state) => selectMovieById(state, movieId));
 
     const crypto = require("crypto");
-    const transactionId = crypto.randomBytes(4).toString("hex");
+    const transactionId = crypto.randomBytes(4).toString("hex").toUpperCase();
 
     if (movie && timeSchedules && seats) {
 
@@ -67,7 +65,8 @@ function MovieView() {
             seats: 3,
             price: movie.price,
             totalPrice: 3 * movie.price,
-            transactionId: transactionId
+            transactionId: transactionId,
+            scheduleId: schedId
         }
 
         let time = movie.duration;
@@ -101,10 +100,10 @@ function MovieView() {
                         <DatePicker onChange={onChange} />
                     </Space>
                     <div className="time-schedules">
-                        <Radio.Group onChange={onChangeTimeSlot} defaultValue="a">
+                        <Radio.Group onChange={onChangeTimeSlot} >
                             {
                                 timeSchedules.map((sched) => (
-                                    <Radio.Button value={`${sched.timeStart} - ${sched.timeEnd}`} >{sched.timeStart} - {sched.timeEnd}</Radio.Button>
+                                    <Radio.Button key={sched.scheduleId} indexkey={sched.scheduleId} value={`${sched.timeStart} - ${sched.timeEnd}`} >{sched.timeStart} - {sched.timeEnd}</Radio.Button>
                                 ))
                             }
                         </Radio.Group>

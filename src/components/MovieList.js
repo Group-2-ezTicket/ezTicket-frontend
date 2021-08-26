@@ -10,7 +10,7 @@ import HomeSearch from "./HomeSearch";
 import { BrowserRouter as Router } from "react-router-dom";
 import '../styles/MovieList.css';
 
-function MovieList(props) {
+function MovieList() {
     const span = 5;
     const movieIds = useSelector(selectMovieIds);
 
@@ -39,8 +39,8 @@ function MovieList(props) {
         else if (cinemaName === "SM North Edaa - Cinema 2") {
             setCinemaId(parseInt(4));
         }
-
     }
+
     return (
 
         <div>

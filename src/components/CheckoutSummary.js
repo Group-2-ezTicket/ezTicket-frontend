@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Row, Col, Divider, Radio, Card } from 'antd';
 import '../styles/Checkout.css';
+import { addOrder } from "../apis/cinema";
 
 function CheckoutSummary(props) {
     const { state } = props.location;
@@ -12,15 +13,21 @@ function CheckoutSummary(props) {
     }
 
     const orderSummary = {
+        userId:1,
         foodList: "",
-        totalPrice: state.totalPrice,
+        totalPrice: parseFloat(state.totalPrice),
         email: "",
         orderStatus: false,
         transactionId: state.transactionId,
+        scheduleId: state.scheduleId
     }
 
-    console.log(orderSummary);
-    
+    useEffect(() => {
+        addOrder(orderSummary).then((response) => {
+            console.log("added to db: ", response.data);
+        });
+    });
+
     return (
         <div>
             <div className="summary">
