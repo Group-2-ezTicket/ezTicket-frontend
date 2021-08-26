@@ -2,7 +2,7 @@ import React from 'react';
 import MenuHeader from "./components/MenuHeader";
 import './App.css';
 import { Layout } from 'antd';
-const { Header, Footer, Sider, Content } = Layout;
+const { Footer } = Layout;
 
 function App() {
 

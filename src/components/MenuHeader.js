@@ -28,27 +28,25 @@ function MenuHeader() {
                                 defaultSelectedKeys={
                                     ['1']
                                 }
-                                <Menu.Item key={1}><Link to="/">MOVIES</Link></Menu.Item>
-                                <Menu.Item key={2}><Link to="/reservation">VIEW MY RESERVATION</Link></Menu.Item>
                                 style={{
                                     background: '#067f83',
                                     color: 'white',
                                     backgroundColor: '067f83'
 
-                                }}
-                            />
+                                }}>
+                                <Menu.Item key={2}><Link to="/reservation">VIEW MY RESERVATION</Link></Menu.Item>
                             </Menu>
                         </div>
                     </Header>
                 </Layout>
-            </div>
+            </div >
             <Switch>
                 <Route exact path="/" component={MovieList} />
                 <Route exact path="/movies/:id" component={MovieView}></Route>
                 <Route exact path="/checkout" component={CheckoutSummary}></Route>
                 <Route exact path="/reservation" component={ReservationDetails}></Route>
             </Switch>
-        </Router>
+        </Router >
     );
 }
 

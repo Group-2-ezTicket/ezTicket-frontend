@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Row, Col, Divider, Radio, Card } from 'antd';
 import '../styles/Checkout.css';
 import { addOrder, updateOrderStatus } from "../apis/cinema";
-import { Modal, Button } from 'antd';
-import { Route, BrowserRouter as Router, Link } from 'react-router-dom';
-import MovieList from './MovieList';
+import { Modal } from 'antd';
+import { Link } from 'react-router-dom';
 
 function CheckoutSummary(props) {
     const { state } = props.location;
