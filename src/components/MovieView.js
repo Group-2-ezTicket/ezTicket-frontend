@@ -16,6 +16,7 @@ function MovieView() {
     const [timeSlot, setTimeSlot] = useState("default"); 
     const [schedId, setSchedId] = useState(0);
     const [day, setDay] = useState(); 
+    const [totalPrice, setTotalPrice] = useState();
 
     function onChange(date, dateString) {
         console.log("date: ", setDay(dateString));
@@ -26,6 +27,11 @@ function MovieView() {
         setTimeSlot(e.target.value);
     }
 
+    function grandTotalPrice (totalPrice){
+        setTotalPrice(totalPrice);
+    }
+
+
     const seatId = 1;
     const [timeSchedules, setTimeSchedules] = useState();
     const [seats, setSeats] = useState();
@@ -34,7 +40,6 @@ function MovieView() {
 
     useEffect(() => {
         getMovie(movieId).then((response) => {
-            console.log("response.data:", response.data);
             dispatch(AddMovie(response.data));
         });
         getTimeSchedulesPerCinemaAndMovie(cinemaId,movieId).then((response) => {
@@ -54,7 +59,7 @@ function MovieView() {
 
     const crypto = require("crypto");
     const transactionId = crypto.randomBytes(4).toString("hex").toUpperCase();
-
+    
     if (movie && timeSchedules && seats) {
 
         const summaryDetails = {
@@ -62,9 +67,10 @@ function MovieView() {
             cinema: cinema.name,
             date: day,
             time: timeSlot,
-            seats: 3,
+            seats: 1,
             price: movie.price,
-            totalPrice: 3 * movie.price,
+            foodPrice: 200,
+            totalPrice: totalPrice,
             transactionId: transactionId,
             scheduleId: schedId
         }
@@ -112,9 +118,9 @@ function MovieView() {
                         <SeatList></SeatList>
                     </div>
                 </div>
-                <FoodPackages ></FoodPackages>
+                <FoodPackages grandTotalPrice={grandTotalPrice} moviePrice={movie.price}></FoodPackages>
                 <button className="button-checkout">
-                        <Link className="link"
+                <Link className="link"
                             to={{
                                 pathname: "/checkout",
                                 state: summaryDetails
@@ -122,6 +128,7 @@ function MovieView() {
             </div >
         );
     }
+    
     return (
         <div>Loading... Movie maybe not be available.</div>
     )
@@ -129,3 +136,4 @@ function MovieView() {
 }
 
 export default MovieView;
+
