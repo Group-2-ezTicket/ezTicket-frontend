@@ -1,8 +1,8 @@
 import React from 'react';
-import { Card, Button } from 'antd';
+import { Card, Button, Empty } from 'antd';
 import { useSelector } from 'react-redux';
 import { selectMovieById } from '../reducers/MovieSlice';
-import { StarOutlined } from '@ant-design/icons';
+import { StarOutlined, WindowsFilled } from '@ant-design/icons';
 
 function MovieCard(props) {
     const id = props.movieId;
