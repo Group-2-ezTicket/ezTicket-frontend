@@ -1,9 +1,10 @@
-
 import { useState } from "react"
 import React from 'react';
 import '../styles/MovieDetails.css'
-function FoodPackages() {
+function FoodPackages(props) {
     const [number, setNumber] = useState(0);
+    const price = 100;
+    const foodTotalPrice = number * price;
     function increase() {
         setNumber(number + 1);
     }
@@ -26,7 +27,7 @@ function FoodPackages() {
                     </td>
                     <td>
                         <div className="counter">
-                            <div id="div-price"><span id="span-price">PRICE: ₱200</span><br /></div>
+                            <div id="div-price"><span id="span-price">PRICE: ₱{foodTotalPrice}</span><br /></div>
                             <button id="button-quantity" onClick={increase}>+</button>
                             <span id="number-quantity">{number}</span>
                             <button id="button-quantity" onClick={decrease}>-</button>
@@ -47,5 +48,4 @@ function FoodPackages() {
         </div>
     )
 }
-
 export default FoodPackages;

@@ -92,7 +92,7 @@ function MovieView() {
                     </div>
 
                 </div>
-                <FoodPackages></FoodPackages>
+                <FoodPackages moviePrice={movie.moviePrice}></FoodPackages>
             </div >
         );
     }
