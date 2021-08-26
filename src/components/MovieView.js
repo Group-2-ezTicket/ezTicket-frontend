@@ -39,7 +39,6 @@ function MovieView() {
 
     useEffect(() => {
         getMovie(movieId).then((response) => {
-            console.log("response.data:", response.data);
             dispatch(AddMovie(response.data));
         });
         getTimeSchedulesPerCinemaAndMovie(cinemaId,movieId).then((response) => {
