@@ -1,0 +1,13 @@
+.reservationForm{
+    width: 40%;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+.reservationCard{
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 70px;
+    border: 1px solid rgb(219, 216, 216);
+    padding : 50px;
+}
