@@ -6,7 +6,6 @@ import { AddMovie } from '../reducers/MovieSlice'
 import { useDispatch, useSelector } from "react-redux"
 import { selectMovieById } from '../reducers/MovieSlice'
 import FoodPackages from './FoodPackages';
-import SeatList from './SeatList';
 import {Link} from 'react-router-dom';
 
 function MovieView() {
@@ -82,7 +81,6 @@ function MovieView() {
 
         return (
             <div>
-
                 <table id="movie-details">
                     <tbody>
                         <tr>
@@ -93,20 +91,21 @@ function MovieView() {
                                 <h1 id="movie-title">{movie.movieTitle}</h1>
                                 <b id="movie-duration">{totalTime}</b><br />
                                 <Rate defaultValue={movie.rating} disabled='true'></Rate><br />
-                                <b id="movie-pg">PHP {movie.price}</b><br />
+                                <h3 className="price"><b id="movie-pg">₱ {movie.price}</b></h3><br />
                                 <p id="movie-synopsis">{movie.synopsis}</p>
                             </td>
                         </tr>
                     </tbody>
                 </table>
+                <hr />
                 <Divider />
                 <div id="seat-and-schedule">
-                    <h1>Seat and Schedule</h1>
+                    <h1 id="movie-title" >Schedules</h1>
                     <Space direction="vertical">
-                        <DatePicker onChange={onChange} />
+                        <DatePicker size="large" onChange={onChange} />
                     </Space>
                     <div className="time-schedules">
-                        <Radio.Group onChange={onChangeTimeSlot} >
+                        <Radio.Group size="large" onChange={onChangeTimeSlot} >
                             {
                                 timeSchedules.map((sched) => (
                                     <Radio.Button key={sched.scheduleId} indexkey={sched.scheduleId} value={`${sched.timeStart} - ${sched.timeEnd}`} >{sched.timeStart} - {sched.timeEnd}</Radio.Button>
@@ -115,10 +114,11 @@ function MovieView() {
                         </Radio.Group>
                     </div>
                     <div className="seatList">
-                        <SeatList></SeatList>
+                        {/* <SeatList></SeatList> */}
                     </div>
                 </div>
-                <FoodPackages grandTotalPrice={grandTotalPrice} moviePrice={movie.price}></FoodPackages>
+                <Divider />
+                <FoodPackages grandTotalPrice={grandTotalPrice} moviePrice={movie.price} />
                 <button className="button-checkout">
                 <Link className="link"
                             to={{

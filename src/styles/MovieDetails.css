@@ -78,9 +78,9 @@
   margin: 20px;
 }
 
-#hr-food {
-  width: 80%;
-}
+/* #hr-food {
+  width: 80%; 
+} */
 
 .site-card-wrapper {
   padding: 30px;
@@ -89,6 +89,7 @@
 }
 
 #food-package-name {
+  margin-top: 50px;
   color: rgb(6, 127, 131);
 }
 
@@ -101,7 +102,7 @@
 }
 
 #food-package-product {
-  height: 50vh;
+  height: 40vh;
 }
 
 .td-food-info {
@@ -145,7 +146,8 @@
 }
 
 #div-price {
-  margin: 5%;
+  margin-top: 0%;
+  margin-bottom: 5%;
 }
 
 .button-checkout {
@@ -164,4 +166,9 @@
 
 .link {
   color: white;
+}
+
+.price {
+  color: rgb(5, 100, 104);
+  margin-top: 20px;
 }

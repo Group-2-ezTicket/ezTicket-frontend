@@ -18,32 +18,37 @@ function FoodPackages(props) {
     return (
         <div>
             <hr id='hr-food' />
-            <h1>Food Bundle Options</h1>
+            <h1 id='food-package-name'><b>Food Bundle Options</b></h1>
             <table id='food-packages'>
-                <tr>
-                    <th colSpan='2'><h2 id='food-package-name'>Popcorn and Soda</h2></th>
-                </tr>
-                <tr id='food-package-table'>
-                    <td id='td-food-info' >
-                        <img alt='poster' id='food-package-product' src="../images/food-1.png" />
-                    </td>
-                    <td>
-                        <div className="counter">
-                            <div id="div-price"><span id="span-price">PRICE: ₱{actualFoodPrice}</span><br /></div>
-                            <h2>Do you want to include food?</h2>
-                            <b><Checkbox onChange={onChangeFoodPackage} id="cbx-food">Yes</Checkbox></b>
-                        </div>
-                    </td>
-                </tr>
+                <tbody>
+                    <tr>
+                        <th colSpan='2'></th>
+                    </tr>
+                    <tr id='food-package-table'>
+                        <td id='td-food-info' >
+                            <img alt='poster' id='food-package-product' src="../images/food-1.png" />
+                        </td>
+                        <td>
+                            <div className="counter">
+                            <h1><b>Popcorn and Soda</b></h1>
+                                <div id="div-price"><span id="span-price">₱ {actualFoodPrice}</span><br /></div>
+                                <h2>Do you want to include this?</h2>
+                                <b><Checkbox onChange={onChangeFoodPackage} id="cbx-food"><h3><b>Yes</b></h3></Checkbox></b>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
             </table>
             <table id='food-packages'>
-                <tr id='food-package-table'>
-                    <td id='td-food-info' >
-                    </td>
-                    <td id='span-price'>
-                        TOTAL PRICE: ₱{totalPrice}
-                    </td>
-                </tr>
+                <tbody>
+                    <tr id='food-package-table'>
+                        <td id='td-food-info' >
+                        </td>
+                        <td id='span-price'>
+                            TOTAL PRICE: ₱{totalPrice}
+                        </td>
+                    </tr>
+                </tbody>
             </table>
         </div>
     )
