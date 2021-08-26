@@ -1,33 +1,48 @@
 .site-layout-content {
-    min-height: 280px;
-    padding: 24px;
-    background: rgb(255, 255, 255);
-  }
-  #components-layout-demo-top .logo {
-    float: left;
-    width: 120px;
-    height: 31px;
-    margin: 16px 24px 16px 0;
-    background: rgba(255, 255, 255, 0.3);
-  }
-  .ant-row-rtl #components-layout-demo-top .logo {
-    float: right;
-    margin: 16px 0 16px 24px;
-  }
+  min-height: 280px;
+  padding: 24px;
+  background: rgb(255, 255, 255);
+}
 
-  .menuHeader {
-      float : right;
-  }
+#components-layout-demo-top .logo {
+  float: left;
+  width: 120px;
+  height: 31px;
+  margin: 16px 24px 16px 0;
+  background: rgba(255, 255, 255, 0.3);
+}
 
-  .logo{
-      color: aliceblue;
-      font-size:x-large;
-      font-weight: bolder;
-      width: 150px;
-      float: left;
-  }
-  
-  .cinemaFilter{
-     float: left;
-     margin-top: 20px;
-  }
+.ant-row-rtl #components-layout-demo-top .logo {
+  float: right;
+  margin: 16px 0 16px 24px;
+}
+
+.menuHeader {
+  float: right;
+}
+
+.logo {
+  color: aliceblue;
+  font-size: x-large;
+  font-weight: bolder;
+  width: 150px;
+  float: left;
+}
+
+.cinemaFilter {
+  float: left;
+  margin-top: 20px;
+}
+
+/* .main-header, .layout, .menuHeader {
+  background: gray;
+} */
+
+.customTag {
+  font-size: 2px;
+}
+
+.header-icon{
+  size: 20%;
+  width: 80%;
+}

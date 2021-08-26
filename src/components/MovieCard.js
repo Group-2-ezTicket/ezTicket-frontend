@@ -30,7 +30,10 @@ function MovieCard(props) {
                 }
                 </p>
                 <p>PHP {movie.item.price}</p>
-                <Button type="primary" href={`movies/${id}?cinemaId=${cinemaId}`} >Reserve Seat</Button>
+                <Button type="primary" href={`movies/${id}?cinemaId=${cinemaId}`} style={{
+                    backgroundColor: '#067f83',
+                    border: 'none'
+                }}>Reserve Seat</Button>
             </Card>
         </div>
     );

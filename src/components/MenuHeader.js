@@ -5,22 +5,35 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import MovieView from './MovieView'
 import MovieList from './MovieList';
 import CheckoutSummary from './CheckoutSummary';
+import styles from '../styles/MenuHeader.css';
 
 const { Header } = Layout;
 
 function MenuHeader() {
-
     return (
         <Router>
             <div>
                 <Layout className="layout">
-                    <Header>
-                        <span className="logo">EZTicket</span>
+                    <Header className="main-header" style={
+                        {
+                            background: '#067f83'
+                        }
+                    }>
+                        <span className="logo" onclick="window.open(this.src)">
+                            <img src="https://i.imgur.com/qdaGaoM.png" className="header-icon" alt="icon" id="header-icon" />
+                        </span>
                         <div className="menuHeader">
-                            <Menu theme="dark" mode="horizontal"
+                            <Menu mode="horizontal" className={styles.customTag}
                                 defaultSelectedKeys={
                                     ['1']
-                                }>
+                                }
+                                style={{
+                                    background: '#067f83',
+                                    color: 'white',
+                                    backgroundColor: '067f83'
+
+                                }}
+                            >
                                 <Menu.Item key={1}>MOVIES</Menu.Item>
                                 <Menu.Item key={2}>FOOD OPTIONS</Menu.Item>
                             </Menu>
@@ -29,7 +42,7 @@ function MenuHeader() {
                 </Layout>
             </div>
             <Switch>
-                <Route exact path="/"  component={MovieList}/>
+                <Route exact path="/" component={MovieList} />
                 <Route exact path="/movies/:id" component={MovieView}></Route>
                 <Route exact path="/checkout" component={CheckoutSummary}></Route>
             </Switch>
