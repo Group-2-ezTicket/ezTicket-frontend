@@ -1,23 +1,22 @@
 import React, { useState } from 'react';
-import { Row, Col, Divider, Radio, Button, Card } from 'antd';
+import { Row, Col, Divider, Radio, Card } from 'antd';
 import '../styles/Checkout.css';
 
 function CheckoutSummary(props) {
     const { state } = props.location;
     const [radio, setRadio] = useState("Invoice"); 
+
     function onChange(e){
         setRadio(e.target.value);
         console.log('radio checked', e.target.value);
     }
-    const crypto = require("crypto");
 
-    const transactionId = crypto.randomBytes(4).toString("hex");
     const orderSummary = {
         foodList: "",
         totalPrice: state.totalPrice,
         email: "",
         orderStatus: false,
-        transactionId: transactionId,
+        transactionId: state.transactionId,
     }
 
     console.log(orderSummary);
@@ -42,7 +41,7 @@ function CheckoutSummary(props) {
                 </Col>
             </Row>
             <Divider />
-            <h1><b>Transaction ID: {transactionId}</b></h1>
+            <h1><b>Transaction ID: {state.transactionId}</b></h1>
             <Divider />
             <Row className="movie-details" gutter={16}>
                 <Col span={16} >
@@ -58,8 +57,8 @@ function CheckoutSummary(props) {
                 <Col span={4} >
                     <br/><br/><br/><br/><br/><br/><br/>
                     <Card className="card" style={{ backgroundColor: '#0a9ca1' }}>
-                        <h1 className="ghost" >Total Price: <span className="money" >₱ {state.totalPrice}</span></h1>
-                        <Button size="large" className="button" ghost>PAY NOW</Button>
+                        <h1 className="ghost" >Total Price: ₱ {state.totalPrice}</h1>
+                        <button className="button">PAY NOW</button> 
                     </Card>
                 </Col>
             </Row>

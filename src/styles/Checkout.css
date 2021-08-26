@@ -49,6 +49,20 @@
     color: white;
 }
 
-/* .button {
-    margin-left: 70px;
-} */
+.button {
+    background-color: rgb(6, 127, 131);
+    border: none;
+    color: white;
+    /* padding: 15px 32px; */
+    text-align: center;
+    text-decoration: none;
+    /* display: inline-block; */
+    cursor: pointer;
+    font-size: 200%;
+    margin: 5%;
+    width: 50%;
+}
+.button:hover {
+    color: grey
+}
+
