@@ -2,7 +2,7 @@ import React, { useEffect,useState } from 'react'
 import '../styles/MovieDetails.css'
 import { Menu, Dropdown, Button, message, Space, Rate, DatePicker } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
-import { getMovie, getTimeSchedulesPerCinemaAndMovie, getSeatsByScheduleId } from '../apis/cinema'
+import { getMovie, getTimeSchedulesPerCinemaAndMovie } from '../apis/cinema'
 import { AddMovie } from '../reducers/MovieSlice'
 import { useDispatch, useSelector } from "react-redux"
 import { selectMovieById } from '../reducers/MovieSlice'
@@ -11,9 +11,7 @@ import SeatList from './SeatList';
 
 function MovieView(props) {
     const movieId = window.location.pathname.replace('/movies/', '')
-    // const movieId = 1;
     const cinemaId = window.location.search.split("=")[1]
-    console.log("cinemaId:", cinemaId);
 
     function handleMenuClick(e) {
         message.info('Click on menu item.');
@@ -34,35 +32,30 @@ function MovieView(props) {
         </Menu>
     );
 
+    const [currentScheduleId , setCurrentScheduleId] = useState();
+    const [timeSchedules, setTimeSchedules] = useState();
+    const movie = useSelector((state) => selectMovieById(state, movieId));
+    const dispatch = useDispatch()
+
     function onChange(date, dateString) {
         console.log(date, dateString);
     }
 
-    //const cinemaId = 1;
-    const seatId = 1;
-    const [timeSchedules, setTimeSchedules] = useState();
-    const [seats, setSeats] = useState();
+    function selectSchedule(scheduleId){
+        setCurrentScheduleId(scheduleId);
+    }
 
     useEffect(() => {
         getMovie(movieId).then((response) => {
-            console.log("response.data:", response.data);
             dispatch(AddMovie(response.data));
         });
         getTimeSchedulesPerCinemaAndMovie(cinemaId,movieId).then((response) => {
             setTimeSchedules(response.data);
         });
+    },[movieId, cinemaId, dispatch])
 
-        getSeatsByScheduleId(seatId).then((response) => {
-            setSeats(response.data);
-        });
-    })
-
-    console.log("seats",seats);
-
-    const movie = useSelector((state) => selectMovieById(state, movieId));
-    const dispatch = useDispatch()
-
-    if (movie && timeSchedules && seats) {
+    
+    if (movie && timeSchedules) {
 
         let time = movie.duration;
         var hours = Math.floor(time / 60)
@@ -103,14 +96,16 @@ function MovieView(props) {
                     </Space>
                     <div className="time-schedules">
                         {
-                            timeSchedules.map((sched) => (
-                                <Button>{sched.timeStart} - {sched.timeEnd}</Button>
+                            timeSchedules.map((schedule) => (
+                                <Button onClick={()=>selectSchedule(schedule.scheduleId)} key={schedule.scheduleId}>{schedule.timeStart} - {schedule.timeEnd}</Button>
                             ))
                         }
                     </div>
-                    <div className="seatList">
-                        <SeatList></SeatList>
+                    {currentScheduleId && <div className="seatList">
+                        <SeatList currentScheduleId={currentScheduleId} ></SeatList>
                     </div>
+                    }
+                    
                 </div>
                 <FoodPackages></FoodPackages>
             </div >
