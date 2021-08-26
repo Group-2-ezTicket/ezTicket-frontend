@@ -8,7 +8,7 @@ import CheckoutSummary from './CheckoutSummary';
 
 const { Header } = Layout;
 
-function MenuHeader(props) {
+function MenuHeader() {
 
     return (
         <Router>
@@ -31,7 +31,6 @@ function MenuHeader(props) {
             <Switch>
                 <Route exact path="/"  component={MovieList}/>
                 <Route exact path="/movies/:id" component={MovieView}></Route>
-                {/* <Route exact path="/movies/*" render={props => <MovieView getCinemaId = {getCinemaId} />}></Route> */}
                 <Route exact path="/checkout" component={CheckoutSummary}></Route>
             </Switch>
         </Router>

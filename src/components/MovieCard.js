@@ -31,7 +31,6 @@ function MovieCard(props) {
                 }
                 </p>
                 <p>PHP {movie.item.price}</p>
-                {/* <Button type="primary" onClick={handleClick} >Reserve Seat</Button> */}
                 <Button type="primary" href={`movies/${id}?cinemaId=${cinemaId}`} >Reserve Seat</Button>
             </Card>
         </div>

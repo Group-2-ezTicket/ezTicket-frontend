@@ -1,44 +1,34 @@
 import React, { useEffect,useState } from 'react'
 import '../styles/MovieDetails.css'
-import { Menu, Dropdown, Button, message, Space, Rate, DatePicker } from 'antd';
-import { DownOutlined } from '@ant-design/icons';
-import { getMovie, getTimeSchedulesPerCinemaAndMovie } from '../apis/cinema'
+import { Space, Rate, DatePicker, Divider, Radio } from 'antd';
+import { getMovie, getTimeSchedulesPerCinemaAndMovie, getSeatsByScheduleId, getCinemaByCinemaId } from '../apis/cinema'
 import { AddMovie } from '../reducers/MovieSlice'
 import { useDispatch, useSelector } from "react-redux"
 import { selectMovieById } from '../reducers/MovieSlice'
 import FoodPackages from './FoodPackages';
+import SeatList from './SeatList';
+import {Link} from 'react-router-dom';
 
-function MovieView(props) {
-    const movieId = window.location.pathname.replace('/movies/', '')
-    // const movieId = 1;
-    const cinemaId = window.location.search.split("=")[1]
-    console.log("cinemaId:", cinemaId);
-
-    function handleMenuClick(e) {
-        message.info('Click on menu item.');
-        console.log('click', e);
-    }
-
-    const menu = (
-        <Menu onClick={handleMenuClick}>
-            <Menu.Item key="1">
-                SM North - Cinema 1
-            </Menu.Item>
-            <Menu.Item key="2">
-                SM North - Cinema 2
-            </Menu.Item>
-            <Menu.Item key="3">
-                SM North - Cinema 3
-            </Menu.Item>
-        </Menu>
-    );
+function MovieView() {
+    const movieId = window.location.pathname.replace('/movies/', '');
+    const cinemaId = window.location.search.split("=")[1];
+    const [cinema, setCinema] = useState({}); 
+    const [timeSlot, setTimeSlot] = useState(); 
+    const [day, setDay] = useState(); 
 
     function onChange(date, dateString) {
-        console.log(date, dateString);
+        console.log("date: ", setDay(dateString));
+    }
+
+    function onChangeTimeSlot(e) {
+        console.log(`radio checked:${e.target.value}`);
+        setTimeSlot(e.target.value);
     }
 
     //const cinemaId = 1;
+    const seatId = 1;
     const [timeSchedules, setTimeSchedules] = useState();
+    const [seats, setSeats] = useState();
 
     useEffect(() => {
         getMovie(movieId).then((response) => {
@@ -48,14 +38,36 @@ function MovieView(props) {
         getTimeSchedulesPerCinemaAndMovie(cinemaId,movieId).then((response) => {
             setTimeSchedules(response.data);
         });
-    })
 
-    console.log("timeShed",timeSchedules);
+        getSeatsByScheduleId(seatId).then((response) => {
+            setSeats(response.data);
+        });
+
+        getCinemaByCinemaId(cinemaId).then((response) => {
+            setCinema(response.data)
+        });
+    }, [])
+
+    console.log("seats",seats);
 
     const movie = useSelector((state) => selectMovieById(state, movieId));
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
-    if (movie && timeSchedules) {
+    const crypto = require("crypto");
+    const transactionId = crypto.randomBytes(4).toString("hex");
+
+    if (movie && timeSchedules && seats) {
+
+        const summaryDetails = {
+            movie: movie.movieTitle,
+            cinema: cinema.name,
+            date: day,
+            time: timeSlot,
+            seats: 3,
+            price: movie.price,
+            totalPrice: 3 * movie.price,
+            transactionId: transactionId
+        }
 
         let time = movie.duration;
         var hours = Math.floor(time / 60)
@@ -70,45 +82,48 @@ function MovieView(props) {
                         <tr>
                             <td id="movie-poster-table"><img id="movie-poster" alt="poster" src={`../images/poster-${movie.id}.jpg`} /></td>
                             <td id="movie-description">
+                                <h2>{cinema.name}</h2>
                                 <b id="movie-pg">PG-13 | {movie.genre}</b>
                                 <h1 id="movie-title">{movie.movieTitle}</h1>
                                 <b id="movie-duration">{totalTime}</b><br />
-                                <Rate defaultValue={movie.rating} disabled='true'></Rate>
+                                <Rate defaultValue={movie.rating} disabled='true'></Rate><br />
+                                <b id="movie-pg">PHP {movie.price}</b><br />
                                 <p id="movie-synopsis">{movie.synopsis}</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td id="movie-theatre-dropdown" colSpan="2">
-                                <hr />
-                                <Dropdown overlay={menu} className="movie-theatre-dropdown-button">
-                                    <Button>
-                                        Select Theatre <DownOutlined />
-                                    </Button>
-                                </Dropdown>
                             </td>
                         </tr>
                     </tbody>
                 </table>
+                <Divider />
                 <div id="seat-and-schedule">
                     <h1>Seat and Schedule</h1>
                     <Space direction="vertical">
                         <DatePicker onChange={onChange} />
                     </Space>
                     <div className="time-schedules">
-                        {
-                            timeSchedules.map((sched) => (
-                                <Button>{sched.timeStart} - {sched.timeEnd}</Button>
-                            ))
-                        }
+                        <Radio.Group onChange={onChangeTimeSlot} defaultValue="a">
+                            {
+                                timeSchedules.map((sched) => (
+                                    <Radio.Button value={`${sched.timeStart} - ${sched.timeEnd}`} >{sched.timeStart} - {sched.timeEnd}</Radio.Button>
+                                ))
+                            }
+                        </Radio.Group>
                     </div>
-
+                    <div className="seatList">
+                        <SeatList></SeatList>
+                    </div>
                 </div>
-                <FoodPackages></FoodPackages>
+                <FoodPackages ></FoodPackages>
+                <button className="button-checkout">
+                        <Link className="link"
+                            to={{
+                                pathname: "/checkout",
+                                state: summaryDetails
+                            }}>Checkout</Link></button>
             </div >
         );
     }
     return (
-        <div>Loading...</div>
+        <div>Loading... Movie maybe not be available.</div>
     )
 
 }
