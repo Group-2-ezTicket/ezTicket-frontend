@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Button, Input} from 'antd';
+import {Button, Divider, Input} from 'antd';
 import {SearchOutlined} from '@ant-design/icons';
 import "../styles/ReservationDetails.css";
 import {getOrderDetailsByTransacId} from '../apis/cinema';
@@ -22,20 +22,29 @@ function ReservationDetails() {
         console.log("transacDetails", transacDetails);
     }
 
+    const cardStatus = transacDetails === undefined ? "" : "show";
     return (
         <div>
             <div className="reservationForm">
-                <h2>Please input your Reservation ID</h2>
-                <Input on={handleInputIDChange}
-                    placeholder="Reservation ID"
-                    size="large"
-                    value={transacID}/>
-                <Button type="primary"
-                    icon={<SearchOutlined/>}
-                    size="large"
-                    onClick={handleSearchTransacID}>
-                    Search
-                </Button>
+                <div>
+                    <h2>Please input your Reservation ID</h2>
+                    <Input onChange={handleInputIDChange}
+                        placeholder="Reservation ID"
+                        size="large"
+                        value={transacID}/>
+                    <Button type="primary"
+                        icon={<SearchOutlined/>}
+                        size="large"
+                        onClick={handleSearchTransacID}>
+                        Search
+                    </Button>
+                </div>
+                <div className={
+                    `reservationCard${cardStatus}`
+                }>
+                    <h1>RESERVATION DETAILS</h1>
+                    <Divider></Divider>
+                </div>
             </div>
         </div>
     );
