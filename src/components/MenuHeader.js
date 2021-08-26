@@ -33,10 +33,7 @@ function MenuHeader() {
                                     backgroundColor: '067f83'
 
                                 }}
-                            >
-                                <Menu.Item key={1}>MOVIES</Menu.Item>
-                                <Menu.Item key={2}>FOOD OPTIONS</Menu.Item>
-                            </Menu>
+                            />
                         </div>
                     </Header>
                 </Layout>
