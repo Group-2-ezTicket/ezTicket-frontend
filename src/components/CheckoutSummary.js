@@ -14,7 +14,7 @@ function CheckoutSummary(props) {
 
     const orderSummary = {
         userId:1,
-        foodList: "",
+        foodList: "Cola & Popcorn",
         totalPrice: parseFloat(state.totalPrice),
         email: "",
         orderStatus: false,
@@ -24,7 +24,6 @@ function CheckoutSummary(props) {
 
     useEffect(() => {
         addOrder(orderSummary).then((response) => {
-            console.log("added to db: ", response.data);
         });
     });
 
@@ -39,13 +38,16 @@ function CheckoutSummary(props) {
                     <h2><b>Cinema:</b> {state.cinema}</h2>
                     <h2><b>Schedule:</b> {state.time} - {state.date}</h2>
                     <h2><b>Seats:</b> {state.seats}</h2>
-                    <h2><b>Price:</b> {state.price}</h2>
+                    <h2><b>Movie Price:</b> 1 x Ticket</h2>
+                    <h2><b>Food:</b> 1 x Cola &amp; Popcorn <div className='foodPrice'></div></h2>
                 </Col>
+                
                 <Col span={5} >
                     <h1><u>Total</u></h1>
-                    <br/><br/><br/><br/><br/><br/><br/>
+                    <br/><br/><br/><br/><br/><br/><br/><br/><h2>₱{state.price}</h2><h2>₱{state.foodPrice}</h2><br/><br/><br/>
                     <h1 className="money">₱ {state.totalPrice}</h1>
                 </Col>
+                
             </Row>
             <Divider />
             <h1><b>Transaction ID: {state.transactionId}</b></h1>

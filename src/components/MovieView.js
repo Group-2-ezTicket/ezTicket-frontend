@@ -16,6 +16,7 @@ function MovieView() {
     const [timeSlot, setTimeSlot] = useState("default"); 
     const [schedId, setSchedId] = useState(0);
     const [day, setDay] = useState(); 
+    const [totalPrice, setTotalPrice] = useState();
 
     function onChange(date, dateString) {
         console.log("date: ", setDay(dateString));
@@ -24,6 +25,10 @@ function MovieView() {
     function onChangeTimeSlot(e) {
         setSchedId(e.target.indexkey);
         setTimeSlot(e.target.value);
+    }
+
+    function grandTotalPrice (totalPrice){
+        setTotalPrice(totalPrice);
     }
 
     const seatId = 1;
@@ -54,7 +59,7 @@ function MovieView() {
 
     const crypto = require("crypto");
     const transactionId = crypto.randomBytes(4).toString("hex").toUpperCase();
-
+    
     if (movie && timeSchedules && seats) {
 
         const summaryDetails = {
@@ -64,7 +69,8 @@ function MovieView() {
             time: timeSlot,
             seats: 3,
             price: movie.price,
-            totalPrice: 3 * movie.price,
+            foodPrice: 200,
+            totalPrice: totalPrice,
             transactionId: transactionId,
             scheduleId: schedId
         }
@@ -112,8 +118,8 @@ function MovieView() {
                         <SeatList></SeatList>
                     </div>
                 </div>
-                <FoodPackages ></FoodPackages>
-                <button className="button-checkout">
+                <FoodPackages grandTotalPrice={grandTotalPrice} moviePrice={movie.price}></FoodPackages>
+                <button className="button-checkout" >
                         <Link className="link"
                             to={{
                                 pathname: "/checkout",

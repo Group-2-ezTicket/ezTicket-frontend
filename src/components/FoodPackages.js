@@ -1,17 +1,20 @@
-
 import { useState } from "react"
 import React from 'react';
 import '../styles/MovieDetails.css'
-function FoodPackages() {
-    const [number, setNumber] = useState(0);
-    function increase() {
-        setNumber(number + 1);
-    }
-
-    function decrease() {
-        setNumber(number - 1);
-    }
-
+import { Checkbox } from 'antd';
+function FoodPackages(props) {
+   
+    const [totalPrice, setTotalPrice] = useState(props.moviePrice);
+    const actualFoodPrice= 200;
+    
+    const onChangeFoodPackage = e => {
+        if (e.target.checked === true){
+            setTotalPrice(props.moviePrice + actualFoodPrice);
+        }else {
+            setTotalPrice(props.moviePrice);
+        }       
+      };
+      props.grandTotalPrice(totalPrice); 
     return (
         <div>
             <hr id='hr-food' />
@@ -26,10 +29,9 @@ function FoodPackages() {
                     </td>
                     <td>
                         <div className="counter">
-                            <div id="div-price"><span id="span-price">PRICE: ₱200</span><br /></div>
-                            <button id="button-quantity" onClick={increase}>+</button>
-                            <span id="number-quantity">{number}</span>
-                            <button id="button-quantity" onClick={decrease}>-</button>
+                            <div id="div-price"><span id="span-price">PRICE: ₱{actualFoodPrice}</span><br /></div>
+                            <h2>Do you want to include food?</h2>
+                            <b><Checkbox onChange={onChangeFoodPackage} id="cbx-food">Yes</Checkbox></b>
                         </div>
                     </td>
                 </tr>
@@ -39,11 +41,10 @@ function FoodPackages() {
                     <td id='td-food-info' >
                     </td>
                     <td id='span-price'>
-                        TOTAL PRICE: ₱900
+                        TOTAL PRICE: ₱{totalPrice}
                     </td>
                 </tr>
             </table>
-            {/* <button className="button-checkout">Checkout</button> */}
         </div>
     )
 }

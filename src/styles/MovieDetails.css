@@ -139,6 +139,11 @@
   font-weight: bolder;
 }
 
+#cbx-food{
+  background-color: #008100;
+  border-color: #008100;
+}
+
 #div-price {
   margin: 5%;
 }
