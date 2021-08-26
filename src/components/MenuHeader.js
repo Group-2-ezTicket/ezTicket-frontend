@@ -20,7 +20,7 @@ function MenuHeader() {
                             background: '#067f83'
                         }
                     }>
-                        <span className="logo" onclick="window.open(this.src)">
+                        <span className="logo" >
                             <img src="https://i.imgur.com/qdaGaoM.png" className="header-icon" alt="icon" id="header-icon" />
                         </span>
                         <div className="menuHeader">
