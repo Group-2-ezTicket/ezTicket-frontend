@@ -92,10 +92,6 @@
   color: rgb(6, 127, 131);
 }
 
-#food-package-table {
-  /* width: 250px; */
-}
-
 #food-packages {
   width: 80%;
   margin: auto;
@@ -159,4 +155,8 @@
   font-size: 200%;
   margin: 5%;
   width: 25%;
+}
+
+.link {
+  color: white;
 }

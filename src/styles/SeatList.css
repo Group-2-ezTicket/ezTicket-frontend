@@ -1,0 +1,12 @@
+.seatList{
+    width: 80%;
+    margin: 0 auto;
+    padding: 10px;
+    margin-top: 50px;
+}
+.screen {
+    background: rgb(6, 127, 131);
+}
+.movie-text {
+    color: white;
+}

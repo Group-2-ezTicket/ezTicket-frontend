@@ -39,11 +39,11 @@ function FoodPackages() {
                     <td id='td-food-info' >
                     </td>
                     <td id='span-price'>
-                        TOTAL PRICE: ₱200
+                        TOTAL PRICE: ₱900
                     </td>
                 </tr>
             </table>
-            <button className="button-checkout">Checkout</button>
+            {/* <button className="button-checkout">Checkout</button> */}
         </div>
     )
 }
