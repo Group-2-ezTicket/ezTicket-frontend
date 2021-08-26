@@ -9,7 +9,6 @@ function MovieCard(props) {
     const cinemaId = props.cinemaId;
     const movie = useSelector(state => selectMovieById(state, id));
 
-
     const { Meta } = Card;
     return (
         <div>
