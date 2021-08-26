@@ -31,6 +31,7 @@ function MovieView() {
         setTotalPrice(totalPrice);
     }
 
+
     const seatId = 1;
     const [timeSchedules, setTimeSchedules] = useState();
     const [seats, setSeats] = useState();
@@ -66,7 +67,7 @@ function MovieView() {
             cinema: cinema.name,
             date: day,
             time: timeSlot,
-            seats: 3,
+            seats: 1,
             price: movie.price,
             foodPrice: 200,
             totalPrice: totalPrice,
@@ -118,8 +119,8 @@ function MovieView() {
                     </div>
                 </div>
                 <FoodPackages grandTotalPrice={grandTotalPrice} moviePrice={movie.price}></FoodPackages>
-                <button className="button-checkout" >
-                        <Link className="link"
+                <button className="button-checkout">
+                <Link className="link"
                             to={{
                                 pathname: "/checkout",
                                 state: summaryDetails
@@ -127,6 +128,7 @@ function MovieView() {
             </div >
         );
     }
+    
     return (
         <div>Loading... Movie maybe not be available.</div>
     )
@@ -134,3 +136,4 @@ function MovieView() {
 }
 
 export default MovieView;
+
