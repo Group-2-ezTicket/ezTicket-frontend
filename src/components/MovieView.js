@@ -30,6 +30,8 @@ function MovieView() {
     const [timeSchedules, setTimeSchedules] = useState();
     const [seats, setSeats] = useState();
 
+    const dispatch = useDispatch();
+
     useEffect(() => {
         getMovie(movieId).then((response) => {
             console.log("response.data:", response.data);
@@ -46,12 +48,11 @@ function MovieView() {
         getCinemaByCinemaId(cinemaId).then((response) => {
             setCinema(response.data)
         });
-    }, [])
+    }, [cinemaId, movieId, seatId, dispatch])
 
     console.log("seats",seats);
 
     const movie = useSelector((state) => selectMovieById(state, movieId));
-    const dispatch = useDispatch();
 
     const crypto = require("crypto");
     const transactionId = crypto.randomBytes(4).toString("hex");
