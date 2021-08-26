@@ -11,17 +11,15 @@ const reservationSlice = createSlice({
     name: "reservations",
     initialState: initialState,
     reducers: {
-        // AddMovies(state, action) {
-        //     moviesAdapter.setAll(state, action.payload.map(item => ({id: item.movieId, ...{item}})));
-        // },
-        // AddMovie(state, action) {
-        //     moviesAdapter.addOne(state, action.payload);
-        //     console.log("Action ", action.payload);
-        // },
+        AddOrders(state, action) {
+            reservationAdapter.setAll(state, action.payload.map(item => ({id: item.transacID, ...{item}})));
+        }
     },
 })
 
 export default reservationSlice.reducer;
+
+export const { AddOrders } = reservationSlice.actions;
 
 export const {
     selectAll: selectOrders,

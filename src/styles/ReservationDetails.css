@@ -9,9 +9,5 @@
     margin: 0 auto;
     margin-top: 70px;
     border: 1px solid rgb(219, 216, 216);
-    padding : 10px;
-}
-
-.reservationCard.show{
-
+    padding : 50px;
 }
