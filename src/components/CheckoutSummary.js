@@ -36,7 +36,7 @@ function CheckoutSummary(props) {
         return Modal.success({
             title: 'Payment Confirmed!',
             content: 'Please copy your transaction ID: ' + state.transactionId,
-            onOk() { <Link to='/'></Link> }
+            onOk() { window.location.href='/' }
         });
     }
 
