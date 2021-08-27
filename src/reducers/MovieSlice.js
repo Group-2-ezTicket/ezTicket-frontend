@@ -16,7 +16,6 @@ const moviesSlice = createSlice({
         },
         AddMovie(state, action) {
             moviesAdapter.addOne(state, action.payload);
-            console.log("Action ", action.payload);
         },
     },
 })

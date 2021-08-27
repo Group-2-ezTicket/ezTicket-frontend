@@ -6,7 +6,6 @@ import { AddMovie } from '../reducers/MovieSlice'
 import { useDispatch, useSelector } from "react-redux"
 import { selectMovieById } from '../reducers/MovieSlice'
 import FoodPackages from './FoodPackages';
-import SeatList from './SeatList';
 import {Link} from 'react-router-dom';
 
 function MovieView() {
@@ -16,6 +15,9 @@ function MovieView() {
     const [timeSlot, setTimeSlot] = useState("default"); 
     const [schedId, setSchedId] = useState(0);
     const [day, setDay] = useState(); 
+    const [totalPrice, setTotalPrice] = useState();
+    const [foodPrice, setFoodPrice] = useState();
+    const [foodName, setFoodName] = useState();
 
     function onChange(date, dateString) {
         console.log("date: ", setDay(dateString));
@@ -26,6 +28,16 @@ function MovieView() {
         setTimeSlot(e.target.value);
     }
 
+    function grandTotalPrice (totalPrice){
+        setTotalPrice(totalPrice);
+    }
+
+    function foodDetails (foodPrice, foodName){
+        setFoodPrice(foodPrice);
+        setFoodName(foodName);
+    }
+
+
     const seatId = 1;
     const [timeSchedules, setTimeSchedules] = useState();
     const [seats, setSeats] = useState();
@@ -34,7 +46,6 @@ function MovieView() {
 
     useEffect(() => {
         getMovie(movieId).then((response) => {
-            console.log("response.data:", response.data);
             dispatch(AddMovie(response.data));
         });
         getTimeSchedulesPerCinemaAndMovie(cinemaId,movieId).then((response) => {
@@ -54,7 +65,7 @@ function MovieView() {
 
     const crypto = require("crypto");
     const transactionId = crypto.randomBytes(4).toString("hex").toUpperCase();
-
+    
     if (movie && timeSchedules && seats) {
 
         const summaryDetails = {
@@ -62,11 +73,13 @@ function MovieView() {
             cinema: cinema.name,
             date: day,
             time: timeSlot,
-            seats: 3,
+            seats: 1,
             price: movie.price,
-            totalPrice: 3 * movie.price,
+            foodPrice: foodPrice,
+            totalPrice: totalPrice,
             transactionId: transactionId,
-            scheduleId: schedId
+            scheduleId: schedId,
+            foodName: foodName
         }
 
         let time = movie.duration;
@@ -76,7 +89,6 @@ function MovieView() {
 
         return (
             <div>
-
                 <table id="movie-details">
                     <tbody>
                         <tr>
@@ -87,20 +99,21 @@ function MovieView() {
                                 <h1 id="movie-title">{movie.movieTitle}</h1>
                                 <b id="movie-duration">{totalTime}</b><br />
                                 <Rate defaultValue={movie.rating} disabled='true'></Rate><br />
-                                <b id="movie-pg">PHP {movie.price}</b><br />
+                                <h3 className="price"><b id="movie-pg">₱ {movie.price}</b></h3><br />
                                 <p id="movie-synopsis">{movie.synopsis}</p>
                             </td>
                         </tr>
                     </tbody>
                 </table>
+                <hr />
                 <Divider />
                 <div id="seat-and-schedule">
-                    <h1>Seat and Schedule</h1>
+                    <h1 id="movie-title" >Schedules</h1>
                     <Space direction="vertical">
-                        <DatePicker onChange={onChange} />
+                        <DatePicker size="large" onChange={onChange} />
                     </Space>
                     <div className="time-schedules">
-                        <Radio.Group onChange={onChangeTimeSlot} >
+                        <Radio.Group size="large" onChange={onChangeTimeSlot} >
                             {
                                 timeSchedules.map((sched) => (
                                     <Radio.Button key={sched.scheduleId} indexkey={sched.scheduleId} value={`${sched.timeStart} - ${sched.timeEnd}`} >{sched.timeStart} - {sched.timeEnd}</Radio.Button>
@@ -109,12 +122,13 @@ function MovieView() {
                         </Radio.Group>
                     </div>
                     <div className="seatList">
-                        <SeatList></SeatList>
+                        {/* <SeatList></SeatList> */}
                     </div>
                 </div>
-                <FoodPackages ></FoodPackages>
+                <Divider />
+                <FoodPackages grandTotalPrice={grandTotalPrice} moviePrice={movie.price} foodDetails={foodDetails} />
                 <button className="button-checkout">
-                        <Link className="link"
+                <Link className="link"
                             to={{
                                 pathname: "/checkout",
                                 state: summaryDetails
@@ -122,6 +136,7 @@ function MovieView() {
             </div >
         );
     }
+    
     return (
         <div>Loading... Movie maybe not be available.</div>
     )
@@ -129,3 +144,4 @@ function MovieView() {
 }
 
 export default MovieView;
+

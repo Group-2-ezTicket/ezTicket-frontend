@@ -24,6 +24,10 @@ export const getCinemasbyMovieId = (id) => {
     return api.get(`/schedules/cinemas?movieId=${id}`);
 }
 
+export const getOrderDetailsByTransacId = (id) => {
+    return api.get(`orders?transactionId=${id}`);
+}
+
 export const getSeatsByScheduleId = (id)=> {
     return api.get(`/seats?scheduleId=${id}`);
 }
