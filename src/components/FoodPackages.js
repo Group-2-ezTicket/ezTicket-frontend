@@ -6,15 +6,19 @@ function FoodPackages(props) {
    
     const [totalPrice, setTotalPrice] = useState(props.moviePrice);
     const actualFoodPrice= 200;
+    var foodName = '';
     
     const onChangeFoodPackage = e => {
         if (e.target.checked === true){
+            foodName = 'Cola & Popcorn';
             setTotalPrice(props.moviePrice + actualFoodPrice);
         }else {
+            
             setTotalPrice(props.moviePrice);
         }       
       };
       props.grandTotalPrice(totalPrice); 
+      props.foodDetails(actualFoodPrice, foodName)
     return (
         <div>
             <hr id='hr-food' />

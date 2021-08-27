@@ -16,6 +16,8 @@ function MovieView() {
     const [schedId, setSchedId] = useState(0);
     const [day, setDay] = useState(); 
     const [totalPrice, setTotalPrice] = useState();
+    const [foodPrice, setFoodPrice] = useState();
+    const [foodName, setFoodName] = useState();
 
     function onChange(date, dateString) {
         console.log("date: ", setDay(dateString));
@@ -28,6 +30,11 @@ function MovieView() {
 
     function grandTotalPrice (totalPrice){
         setTotalPrice(totalPrice);
+    }
+
+    function foodDetails (foodPrice, foodName){
+        setFoodPrice(foodPrice);
+        setFoodName(foodName);
     }
 
 
@@ -68,10 +75,11 @@ function MovieView() {
             time: timeSlot,
             seats: 1,
             price: movie.price,
-            foodPrice: 200,
+            foodPrice: foodPrice,
             totalPrice: totalPrice,
             transactionId: transactionId,
-            scheduleId: schedId
+            scheduleId: schedId,
+            foodName: foodName
         }
 
         let time = movie.duration;
@@ -118,7 +126,7 @@ function MovieView() {
                     </div>
                 </div>
                 <Divider />
-                <FoodPackages grandTotalPrice={grandTotalPrice} moviePrice={movie.price} />
+                <FoodPackages grandTotalPrice={grandTotalPrice} moviePrice={movie.price} foodDetails={foodDetails} />
                 <button className="button-checkout">
                 <Link className="link"
                             to={{
