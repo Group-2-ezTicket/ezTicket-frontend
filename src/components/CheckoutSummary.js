@@ -3,7 +3,6 @@ import { Row, Col, Divider, Radio, Card } from 'antd';
 import '../styles/Checkout.css';
 import { addOrder, updateOrderStatus } from "../apis/cinema";
 import { Modal } from 'antd';
-import { Link } from 'react-router-dom';
 
 function CheckoutSummary(props) {
     const { state } = props.location;
