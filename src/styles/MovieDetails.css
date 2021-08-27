@@ -172,3 +172,7 @@
   color: rgb(5, 100, 104);
   margin-top: 20px;
 }
+
+.button-checkout:hover{
+  color:rgb(238, 255, 0) !important
+}

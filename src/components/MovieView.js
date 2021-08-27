@@ -121,18 +121,15 @@ function MovieView() {
                             }
                         </Radio.Group>
                     </div>
-                    <div className="seatList">
-                        {/* <SeatList></SeatList> */}
-                    </div>
                 </div>
                 <Divider />
                 <FoodPackages grandTotalPrice={grandTotalPrice} moviePrice={movie.price} foodDetails={foodDetails} />
-                <button className="button-checkout">
                 <Link className="link"
                             to={{
                                 pathname: "/checkout",
                                 state: summaryDetails
-                            }}>Checkout</Link></button>
+                            }}><button className="button-checkout">
+                Checkout</button></Link>
             </div >
         );
     }
