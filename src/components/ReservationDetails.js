@@ -11,15 +11,20 @@ function ReservationDetails() {
 
     const [transacID, setTransacID] = useState("");
     const [transacDetails, setTransacDetails] = useState();
+    var foodDetails;
+    
     var transaction;
     if (transacDetails) {
+        if (transacDetails.foodOrder){
+            foodDetails = <h2><b>Food Order: {transacDetails.foodOrder}</b></h2>
+        }
         transaction = <div className="reservationCard"
             style={
                 {
                     display: transacDetails !== undefined ? "block" : "none"
                 }
         }>
-            <h1>RESERVATION DETAILS</h1>
+            <h1 id='reservation-title'><b>RESERVATION DETAILS</b></h1>
             <Divider/>
             <Row className="movie-details"
                 gutter={16}>
@@ -36,9 +41,7 @@ function ReservationDetails() {
                     <h2>
                         <b>Schedule: {transacDetails.schedule}</b>
                     </h2>
-                    <h2>
-                        <b>Food Order: {transacDetails.foodOrder}</b>
-                    </h2>
+                    {foodDetails}
                 </Col>
                 <Col span={5}>
                     <h1>
@@ -51,13 +54,6 @@ function ReservationDetails() {
             </Row>
         </div>
     }
-
-    // useEffect (() => {
-    //     getOrderDetailsByTransacId(transacID).then((response) => {
-    //         dispatch(AddOrders(response.data))
-    //     })
-    //     }, [transacID, dispatch])
-
     function onInputChange(event) {
         setTransacID(event.target.value)
     }
@@ -69,7 +65,7 @@ function ReservationDetails() {
             })
         }
     }
-    console.log("transacDetailsSaLABAS", transacDetails);
+    
     return (
         <div>
             <div className="reservationForm">
@@ -79,7 +75,7 @@ function ReservationDetails() {
                         placeholder="Reservation ID"
                         size="large"
                         value={transacID}/>
-                    <Button type="primary"
+                    <Button type="primary" id="btn-search"
                         icon={<SearchOutlined/>}
                         size="large"
                         onClick={onClickSearch}>

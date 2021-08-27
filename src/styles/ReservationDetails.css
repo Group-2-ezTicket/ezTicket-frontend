@@ -5,9 +5,17 @@
 }
 
 .reservationCard{
-    width: 80%;
+    width: 100%;
     margin: 0 auto;
     margin-top: 70px;
     border: 1px solid rgb(219, 216, 216);
     padding : 50px;
+}
+
+#reservation-title{
+    color: rgb(6, 127, 131);
+}
+
+#btn-search{
+    margin-top: 10px;
 }
