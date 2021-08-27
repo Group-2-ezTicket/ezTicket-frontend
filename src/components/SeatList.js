@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import {Row, Col, Card} from 'antd';
+import { Row, Col, Card } from 'antd';
 import '../styles/SeatList.css';
 
 function SeatList() {
-    const [chose, setChose ] = useState("");
-    const [count, setCount ] = useState(0)
-    function handleToggle () {
+    const [chose, setChose] = useState("");
+    const [count, setCount] = useState(0)
+    function handleToggle() {
         setChose("done");
         setCount(count + 1);
     }
@@ -14,7 +14,7 @@ function SeatList() {
             <Row>
                 <Col span={24} className="screen"><h3 className="movie-text">MOVIE SCREEN</h3></Col>
             </Row>
-            <br/>
+            <br />
             <Row gutter={[8, 8]}>
                 <Col span={2}><Card hoverable={true} style={{ width: 100 }} className={` ${chose}`} onClick={handleToggle}>A1</Card></Col>
                 <Col span={2}><Card hoverable={true} style={{ width: 100 }}>A2</Card></Col>

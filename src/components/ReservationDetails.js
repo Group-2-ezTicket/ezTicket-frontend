@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
-import {Button, Divider, Input} from 'antd';
-import {SearchOutlined} from '@ant-design/icons';
+import React, { useState } from 'react';
+import { Button, Divider, Input } from 'antd';
+import { SearchOutlined } from '@ant-design/icons';
 import "../styles/ReservationDetails.css";
-import {getOrderDetailsByTransacId} from '../apis/cinema';
-import {Row, Col} from 'antd';
+import { getOrderDetailsByTransacId } from '../apis/cinema';
+import { Row, Col } from 'antd';
 
 
 
@@ -12,10 +12,10 @@ function ReservationDetails() {
     const [transacID, setTransacID] = useState("");
     const [transacDetails, setTransacDetails] = useState();
     var foodDetails;
-    
+
     var transaction;
     if (transacDetails) {
-        if (transacDetails.foodOrder){
+        if (transacDetails.foodOrder) {
             foodDetails = <h2><b>Food Order: {transacDetails.foodOrder}</b></h2>
         }
         transaction = <div className="reservationCard"
@@ -23,9 +23,9 @@ function ReservationDetails() {
                 {
                     display: transacDetails !== undefined ? "block" : "none"
                 }
-        }>
+            }>
             <h1 id='reservation-title'><b>RESERVATION DETAILS</b></h1>
-            <Divider/>
+            <Divider />
             <Row className="movie-details"
                 gutter={16}>
                 <Col span={19}>
@@ -47,7 +47,7 @@ function ReservationDetails() {
                     <h1>
                         <u>Total</u>
                     </h1>
-                    <br/><br/><br/><br/><br/><br/><br/>
+                    <br /><br /><br /><br /><br /><br /><br />
                     <h1 className="money">₱ {transacDetails.totalPrice}
                     </h1>
                 </Col>
@@ -65,7 +65,7 @@ function ReservationDetails() {
             })
         }
     }
-    
+
     return (
         <div>
             <div className="reservationForm">
@@ -74,9 +74,9 @@ function ReservationDetails() {
                     <Input onChange={onInputChange}
                         placeholder="Reservation ID"
                         size="large"
-                        value={transacID}/>
+                        value={transacID} />
                     <Button type="primary" id="btn-search"
-                        icon={<SearchOutlined/>}
+                        icon={<SearchOutlined />}
                         size="large"
                         onClick={onClickSearch}>
                         Search

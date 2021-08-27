@@ -3,22 +3,22 @@ import React from 'react';
 import '../styles/MovieDetails.css'
 import { Checkbox } from 'antd';
 function FoodPackages(props) {
-   
+
     const [totalPrice, setTotalPrice] = useState(props.moviePrice);
-    const actualFoodPrice= 200;
+    const actualFoodPrice = 200;
     var foodName = '';
-    
+
     const onChangeFoodPackage = e => {
-        if (e.target.checked === true){
+        if (e.target.checked === true) {
             foodName = 'Cola & Popcorn';
             setTotalPrice(props.moviePrice + actualFoodPrice);
-        }else {
-            
+        } else {
+
             setTotalPrice(props.moviePrice);
-        }       
-      };
-      props.grandTotalPrice(totalPrice); 
-      props.foodDetails(actualFoodPrice, foodName)
+        }
+    };
+    props.grandTotalPrice(totalPrice);
+    props.foodDetails(actualFoodPrice, foodName)
     return (
         <div>
             <hr id='hr-food' />
@@ -34,7 +34,7 @@ function FoodPackages(props) {
                         </td>
                         <td>
                             <div className="counter">
-                            <h1><b>Popcorn and Soda</b></h1>
+                                <h1><b>Popcorn and Soda</b></h1>
                                 <div id="div-price"><span id="span-price">₱ {actualFoodPrice}</span><br /></div>
                                 <h2>Do you want to include this?</h2>
                                 <b><Checkbox onChange={onChangeFoodPackage} id="cbx-food"><h3><b>Yes</b></h3></Checkbox></b>

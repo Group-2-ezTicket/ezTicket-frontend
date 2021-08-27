@@ -55,7 +55,7 @@ function MovieList() {
                     <Row gutter={16}>
                         {
                             movieIds.map((id) => (
-                            <Col span={span} key={id}>
+                                <Col span={span} key={id}>
                                     <MovieCard movieId={id} cinemaId={cinemaId} key={id} />
                                 </Col>
                             ))

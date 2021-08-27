@@ -40,10 +40,10 @@ function CheckoutSummary(props) {
         addOrder(orderSummary).then((response) => {
         });
     });
-    
-    var foodDetails; 
+
+    var foodDetails;
     var foodPrice;
-    if (state.foodName){
+    if (state.foodName) {
         foodDetails = <h2><b>Food:</b> 1 x Cola &amp; Popcorn <div className='foodPrice'></div></h2>
         foodPrice = <h2 className="money">₱{state.foodPrice}</h2>
     }
@@ -58,20 +58,20 @@ function CheckoutSummary(props) {
                         <h2><b>Cinema:</b> {state.cinema}</h2>
                         <h2><b>Schedule:</b> {state.time} - {state.date}</h2>
                         <h2><b>Seats:</b> {state.seats}</h2>
-                    <h2 ><b>Movie Price:</b> 1 x Ticket</h2>
-                    {foodDetails}
+                        <h2 ><b>Movie Price:</b> 1 x Ticket</h2>
+                        {foodDetails}
                     </Col>
-                
+
                     <Col span={5} >
                         <h1><u>Total</u></h1>
-                    <br/><br/><br/><br/><br/><br/><br/><br/><h2 className="money">₱{state.price}</h2>{foodPrice}<br/><br/><br/>
+                        <br /><br /><br /><br /><br /><br /><br /><br /><h2 className="money">₱{state.price}</h2>{foodPrice}<br /><br /><br />
                         <h1 className="money">₱ {state.totalPrice}</h1>
                     </Col>
-                
+
                 </Row>
                 <Divider />
-            <h1><b>Transaction ID: </b><b id='transacId'>{state.transactionId}</b></h1>
-            <h3 id='userNotes'><i>Remember to save the Transaction ID.</i></h3>
+                <h1><b>Transaction ID: </b><b id='transacId'>{state.transactionId}</b></h1>
+                <h3 id='userNotes'><i>Remember to save the Transaction ID.</i></h3>
                 <Divider />
                 <Row className="movie-details" gutter={16}>
                     <Col span={16} >

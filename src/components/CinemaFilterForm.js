@@ -1,7 +1,7 @@
 import React from 'react';
-import {Input} from 'antd';
+import { Input } from 'antd';
 import '../styles/CinemaFilterForm.css';
-const {Search} = Input;
+const { Search } = Input;
 
 function CinemaFilterForm(props) {
     const onSearch = value => {

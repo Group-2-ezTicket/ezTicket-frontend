@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../styles/MovieDetails.css'
 import { Space, Rate, DatePicker, Divider, Radio } from 'antd';
 import { getMovie, getTimeSchedulesPerCinemaAndMovie, getSeatsByScheduleId, getCinemaByCinemaId } from '../apis/cinema'
@@ -6,15 +6,15 @@ import { AddMovie } from '../reducers/MovieSlice'
 import { useDispatch, useSelector } from "react-redux"
 import { selectMovieById } from '../reducers/MovieSlice'
 import FoodPackages from './FoodPackages';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function MovieView() {
     const movieId = window.location.pathname.replace('/movies/', '');
     const cinemaId = window.location.search.split("=")[1];
-    const [cinema, setCinema] = useState({}); 
-    const [timeSlot, setTimeSlot] = useState("default"); 
+    const [cinema, setCinema] = useState({});
+    const [timeSlot, setTimeSlot] = useState("default");
     const [schedId, setSchedId] = useState(0);
-    const [day, setDay] = useState(); 
+    const [day, setDay] = useState();
     const [totalPrice, setTotalPrice] = useState();
     const [foodPrice, setFoodPrice] = useState();
     const [foodName, setFoodName] = useState();
@@ -28,11 +28,11 @@ function MovieView() {
         setTimeSlot(e.target.value);
     }
 
-    function grandTotalPrice (totalPrice){
+    function grandTotalPrice(totalPrice) {
         setTotalPrice(totalPrice);
     }
 
-    function foodDetails (foodPrice, foodName){
+    function foodDetails(foodPrice, foodName) {
         setFoodPrice(foodPrice);
         setFoodName(foodName);
     }
@@ -48,7 +48,7 @@ function MovieView() {
         getMovie(movieId).then((response) => {
             dispatch(AddMovie(response.data));
         });
-        getTimeSchedulesPerCinemaAndMovie(cinemaId,movieId).then((response) => {
+        getTimeSchedulesPerCinemaAndMovie(cinemaId, movieId).then((response) => {
             setTimeSchedules(response.data);
         });
 
@@ -65,7 +65,7 @@ function MovieView() {
 
     const crypto = require("crypto");
     const transactionId = crypto.randomBytes(4).toString("hex").toUpperCase();
-    
+
     if (movie && timeSchedules && seats) {
 
         const summaryDetails = {
@@ -125,15 +125,15 @@ function MovieView() {
                 <Divider />
                 <FoodPackages grandTotalPrice={grandTotalPrice} moviePrice={movie.price} foodDetails={foodDetails} />
                 <Link className="link"
-                            to={{
-                                pathname: "/checkout",
-                                state: summaryDetails
-                            }}><button className="button-checkout">
-                Checkout</button></Link>
+                    to={{
+                        pathname: "/checkout",
+                        state: summaryDetails
+                    }}><button className="button-checkout">
+                        Checkout</button></Link>
             </div >
         );
     }
-    
+
     return (
         <div>Loading... Movie maybe not be available.</div>
     )
