@@ -46,3 +46,11 @@
   size: 20%;
   width: 80%;
 }
+
+.link{
+  color: white !important
+}
+
+.link:hover{
+  color:rgb(238, 255, 0) !important
+}

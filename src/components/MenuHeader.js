@@ -34,7 +34,7 @@ function MenuHeader() {
                                     backgroundColor: '067f83'
 
                                 }}>
-                                <Menu.Item key={2}><Link to="/reservation">VIEW MY RESERVATION</Link></Menu.Item>
+                                <Menu.Item key={2}><Link className="link" to="/reservation">VIEW MY RESERVATION</Link></Menu.Item>
                             </Menu>
                         </div>
                     </Header>

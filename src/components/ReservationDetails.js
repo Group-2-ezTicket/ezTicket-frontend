@@ -70,7 +70,7 @@ function ReservationDetails() {
         <div>
             <div className="reservationForm">
                 <div>
-                    <h2>Please input your Reservation ID</h2>
+                    <h2>Please input your Transaction ID:</h2>
                     <Input onChange={onInputChange}
                         placeholder="Reservation ID"
                         size="large"
