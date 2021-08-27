@@ -11,7 +11,6 @@ function CheckoutSummary(props) {
 
     function onChange(e) {
         setRadio(e.target.value);
-        console.log('radio checked', e.target.value);
     }
 
     const orderSummary = {
@@ -30,7 +29,6 @@ function CheckoutSummary(props) {
 
     function updateOrder(event) {
         updateOrderStatus(state.transactionId, orderStatus).then((response) => {
-            console.log(response);
         })
         return Modal.success({
             title: 'Payment Confirmed!',
